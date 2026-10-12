@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://q7ahpp2jpvmn"]
+
+[ext_resource type="PackedScene" uid="uid://be0gtm75voess" path="res://Player/player.tscn" id="1_5iwml"]
+[ext_resource type="Script" uid="uid://dvgh52nfp6p7t" path="res://Scripts/cam_controller.gd" id="1_c6hfo"]
+
+[node name="prototype_stage" type="Node" unique_id=1475399487]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=155220428]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=652285737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(73, 1, 81)
+
+[node name="Player" parent="." unique_id=967936490 instance=ExtResource("1_5iwml")]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2718249 node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 3.2942, 7.8509645)
+script = ExtResource("1_c6hfo")
+player = NodePath("../Player")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1233375089]
+transform = Transform3D(1, 0, 0, 0, 0.129057, 0.9916372, 0, -0.9916372, 0.129057, 0, 16.188948, 9.599947)
