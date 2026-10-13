@@ -14,7 +14,7 @@ func exit():
 
 func process_physics(delta: float):
 	var move_dir: Vector3
-	if timer < 0.2:
+	if timer < 0.1:
 		move_dir = clampf(player.target_speed, player.run_speed, 999999) * player.direction
 		if player.speed > player.run_speed: cur_accel = 0 
 		else: cur_accel = player.run_accel
@@ -23,7 +23,7 @@ func process_physics(delta: float):
 		player.target_speed = player.run_speed
 		
 		cur_accel = player.run_accel
-		
+	print(cur_accel)
 	player.vel_move_toward(move_dir, player.run_accel, delta)
 	
 	if player.direction == Vector3.ZERO:

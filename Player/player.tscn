@@ -8,12 +8,12 @@
 
 [sub_resource type="Curve" id="Curve_k53q1"]
 _limits = [-1.0, 1.0, -1.0, 1.0]
-_data = [Vector2(-1, -1), 0.0, 0.96061134, 0, 0, Vector2(-0.22168285, -0.21), 0.91833425, 0.91833425, 0, 0, Vector2(1.4901161e-08, 1), 0.0, 0.0, 0, 0, Vector2(0.27722764, 0.17708325), -1.5284982, -1.5284982, 0, 0, Vector2(0.5162561, 1.4901161e-08), 0.0, 0.0, 0, 0, Vector2(1, 1.4901161e-08), 0.0, 0.0, 0, 0]
-point_count = 6
+_data = [Vector2(-1, -1), 0.0, 0.96061134, 0, 0, Vector2(-0.27211535, 1.4901161e-08), 2.3836453, 2.3836453, 0, 0, Vector2(-0.11249995, 1), 0.0, 0.0, 0, 0, Vector2(1.4901161e-08, 1), 0.0, 0.0, 0, 0, Vector2(0.27722764, 0.17708325), -1.5284982, -1.5284982, 0, 0, Vector2(0.5162561, 1.4901161e-08), 0.0, 0.0, 0, 0, Vector2(1, 1.4901161e-08), 0.0, 0.0, 0, 0]
+point_count = 7
 
 [sub_resource type="Curve" id="Curve_fhl08"]
 _limits = [0.0, 1.0, 0.0, 25.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(12.5, 1), 0.0, 0.0, 0, 0, Vector2(25, 0.25225216), -0.12287057, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(12.5, 1), 0.0, 0.0, 0, 0, Vector2(25, 0.064236045), -0.12287057, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_w7u6u"]
@@ -33,9 +33,9 @@ run_deccel = 35.0
 jump_pulse = 8.5
 jump_gravity = 23.0
 air_strafe_angle_speed = SubResource("Curve_k53q1")
-air_strafe_speed_mult = 0.2
+air_strafe_speed_mult = 0.1
 air_strafe_speed_scaler = SubResource("Curve_fhl08")
-air_strafe_max_angle = 2.0
+air_strafe_max_angle = 1.5
 air_strafe_max_angle_increaser = SubResource("Curve_w7u6u")
 
 [node name="MovementStateMachine" type="Node" parent="." unique_id=221186837 node_paths=PackedStringArray("parent")]
