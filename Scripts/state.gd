@@ -4,6 +4,7 @@ class_name State
 @onready var state_machine = get_parent()
 var parent #any data type
 var transfer_data #any data type
+var timer: float = 0.0
 
 # ready state
 func init():
@@ -12,6 +13,8 @@ func init():
 # enter state
 func start():
 	pass
+func timer_reset():
+	timer = 0
 
 # exit state
 func exit():
@@ -27,8 +30,9 @@ func process_input(event: InputEvent):
 
 # process_frame
 func process_frame(delta: float):
-	#write visual code here
 	return null
+func timer_tick(delta:float):
+	timer += delta
 
 # process_physics
 func process_physics(delta: float):

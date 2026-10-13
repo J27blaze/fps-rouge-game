@@ -5,7 +5,7 @@ var player: Player:
 	set(value): player = value
 
 func start():
-	pass
+	player.target_speed = 0
 
 func exit():
 	pass

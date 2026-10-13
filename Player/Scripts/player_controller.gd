@@ -17,6 +17,7 @@ var input_dir: Vector2 = Vector2.ZERO
 var direction: Vector3 = Vector3.ZERO
 var hor_velocity: Vector3 = Vector3.ZERO
 var speed: float = 0.0
+var target_speed: float = 0.0
 
 #gun
 
@@ -26,9 +27,16 @@ var speed: float = 0.0
 @export_range(0, 30, 0.05) var run_speed: float = 5.
 @export_range(0, 75, 0.05) var run_accel: float = 5.
 @export_range(0, 75, 0.05) var run_deccel: float = 5.
+
 @export_group("Jump")
 @export_range(0, 30, 0.05) var jump_pulse: float = 5.
 @export_range(0, 30, 0.05) var jump_gravity: float = 5.
+@export var air_strafe_angle_speed: Curve # the main one
+@export_range(0, 1, 0.001) var air_strafe_speed_mult: float = 0.3
+@export var air_strafe_speed_scaler: Curve # the on ethat limits it
+@export_range(0, 10, 0.01) var air_strafe_max_angle: float = 0.4
+@export var air_strafe_max_angle_increaser: Curve
+
 
 func _ready():
 	movement_state_machine.init()
@@ -63,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	speed = hor_velocity.length()
 
 	DebugDraw2D.set_text("Speed", snapped(speed, 0.01))
+	DebugDraw2D.set_text("Target_Speed", snapped(target_speed, 0.01))
 
 # --------------------------------------------------------------------------------------------------------------------------- #
 
@@ -72,6 +81,30 @@ func _physics_process(delta: float) -> void:
 func vel_move_toward(target_vector: Vector3, accel: float, delta: float):
 	velocity.x = velocity.move_toward(target_vector, accel * delta).x
 	velocity.z = velocity.move_toward(target_vector, accel * delta).z
+
+func vel_air_strafe(vel: Vector3, dir: Vector3, delta: float) -> Vector3:
+	vel.y = 0 # fail safe
+	dir.y = 0
+	
+	var dot: float
+	if dir != Vector3.ZERO:
+		dot = vel.normalized().dot(dir.normalized())
+	else:
+		dot = 1
+	
+	var new_speed: float = vel.length() + (air_strafe_speed_mult * air_strafe_angle_speed.sample(dot) * air_strafe_speed_scaler.sample(speed))
+	
+	var angle_diff: float = rad_to_deg(vel.signed_angle_to(dir, Vector3.UP))
+	var max_angle_change: float = air_strafe_max_angle*air_strafe_max_angle_increaser.sample(dot)
+	var angle_change: float = deg_to_rad(clampf(angle_diff, -max_angle_change, max_angle_change))
+	
+	var new_vel: Vector3
+	
+	new_vel = vel.normalized().rotated(Vector3.UP, angle_change) * new_speed
+	
+	#print(angle_diff)
+	
+	return new_vel
 
 #state change functions
 func state_check_jump() -> bool:

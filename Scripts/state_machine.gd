@@ -32,9 +32,11 @@ func change_state(new_state: String, transfer_data = null):
 	cur_state = states[new_state]
 	cur_state.transfer_data = transfer_data
 	if print_state: print(str(self.name) + ": " + str(new_state))
+	cur_state.timer_reset()
 	cur_state.start()
 
 func process_physics(delta: float):
+	cur_state.timer_tick(delta)
 	cur_state.process_physics(delta)
 	for state in all_states:
 		state.always_process_physics(delta)
