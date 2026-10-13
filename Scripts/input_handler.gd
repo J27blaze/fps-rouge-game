@@ -9,7 +9,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#print(buffered_inputs)
-	
 	if !buffered_inputs.is_empty():
 		for input in buffered_inputs:
 			
@@ -22,8 +21,8 @@ func _input(event: InputEvent) -> void:
 	#idk how else to program this to be scalable for menus and different buffer windows
 	#but for now the buffered inputs are hard coded EW
 	
-	#if Input.is_action_just_pressed("jump"):
-	#	buffered_inputs["jump"] = 7
+	if Input.is_action_just_pressed("jump"):
+		buffered_inputs["jump"] = 7
 	
 	if Input.is_action_just_pressed("ui_cancel") && event.is_action("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

@@ -2,6 +2,7 @@ extends Node
 class_name State
 
 @onready var state_machine = get_parent()
+var parent #any data type
 var transfer_data #any data type
 
 # ready state
@@ -16,10 +17,8 @@ func start():
 func exit():
 	pass
 
-func change_state(state: String, data = null):
-	state_machine.change_state(state, data)
-func previous_state():
-	return state_machine.previous_state()
+func change_state(state: String, transfer_data = null):
+	state_machine.change_state(state, transfer_data)
 	
 # process_input
 func process_input(event: InputEvent):

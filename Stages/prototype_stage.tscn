@@ -2,6 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://be0gtm75voess" path="res://Player/player.tscn" id="1_5iwml"]
 [ext_resource type="Script" uid="uid://dvgh52nfp6p7t" path="res://Scripts/cam_controller.gd" id="1_c6hfo"]
+[ext_resource type="Texture2D" uid="uid://d0c0uff5e4k2j" path="res://Art/Materials/Place_holder_grey/place_holder_grey.png" id="1_w7u6u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xe7ef"]
+albedo_texture = ExtResource("1_w7u6u")
+uv1_triplanar = true
+uv2_triplanar = true
+texture_filter = 1
 
 [node name="prototype_stage" type="Node" unique_id=1475399487]
 
@@ -9,8 +16,19 @@
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=652285737]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, -0.5, 0)
 size = Vector3(73, 1, 81)
+material = SubResource("StandardMaterial3D_xe7ef")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1382779648]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.5, -23.999998)
+size = Vector3(73, 1, 33)
+material = SubResource("StandardMaterial3D_xe7ef")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=751667636]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 2.5, -29.499998)
+size = Vector3(73, 3, 22)
+material = SubResource("StandardMaterial3D_xe7ef")
 
 [node name="Player" parent="." unique_id=967936490 instance=ExtResource("1_5iwml")]
 unique_name_in_owner = true
