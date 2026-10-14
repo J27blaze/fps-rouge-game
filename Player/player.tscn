@@ -13,8 +13,8 @@ point_count = 7
 
 [sub_resource type="Curve" id="Curve_fhl08"]
 _limits = [0.0, 1.0, 0.0, 25.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(12.5, 1), 0.0, 0.0, 0, 0, Vector2(25, 0.064236045), -0.12287057, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(9.500001, 1), 0.0, 0.0, 0, 0, Vector2(13.228527, 0.48170727), -0.060716156, -0.060716156, 0, 0, Vector2(25, 0), -0.124564454, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Curve" id="Curve_w7u6u"]
 _limits = [0.0, 2.0, -1.0, 1.0]
@@ -33,7 +33,7 @@ run_deccel = 35.0
 jump_pulse = 8.5
 jump_gravity = 23.0
 air_strafe_angle_speed = SubResource("Curve_k53q1")
-air_strafe_speed_mult = 0.1
+air_strafe_speed_mult = 0.08
 air_strafe_speed_scaler = SubResource("Curve_fhl08")
 air_strafe_max_angle = 1.5
 air_strafe_max_angle_increaser = SubResource("Curve_w7u6u")
