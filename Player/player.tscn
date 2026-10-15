@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://gf6uuqg1qvm4" path="res://Scripts/state_machine.gd" id="2_btcbx"]
 [ext_resource type="Script" uid="uid://b4obg0da8obal" path="res://Player/Scripts/Movement_States/run_state.gd" id="4_gwnis"]
 [ext_resource type="Script" uid="uid://b8rbs8wrbd4n6" path="res://Player/Scripts/Movement_States/jump_state.gd" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://b137d1pii77bl" path="res://Player/Scripts/WeaponController/Weapon_States/nonshoot_state.gd" id="6_fhl08"]
+[ext_resource type="Script" uid="uid://b28f8km8qevcb" path="res://Player/Scripts/WeaponController/weapon_controller.gd" id="6_od3ui"]
+[ext_resource type="Script" uid="uid://ba13jo65pmik0" path="res://Player/Scripts/WeaponController/Weapon_States/shoot_state.gd" id="7_vtle1"]
 
 [sub_resource type="Curve" id="Curve_k53q1"]
 _limits = [-1.0, 1.0, -1.0, 1.0]
@@ -13,8 +16,8 @@ point_count = 7
 
 [sub_resource type="Curve" id="Curve_fhl08"]
 _limits = [0.0, 1.0, 0.0, 25.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(9.500001, 1), 0.0, 0.0, 0, 0, Vector2(13.228527, 0.48170727), -0.060716156, -0.060716156, 0, 0, Vector2(25, 0), -0.124564454, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(9.500001, 1), 0.0, 0.0, 0, 0, Vector2(25, 0), -0.124564454, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_w7u6u"]
 _limits = [0.0, 2.0, -1.0, 1.0]
@@ -26,6 +29,8 @@ point_count = 4
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ry41o"]
 
 [node name="Player" type="CharacterBody3D" unique_id=967936490]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_l8h54")
 run_speed = 9.45
 run_accel = 75.0
@@ -33,7 +38,7 @@ run_deccel = 35.0
 jump_pulse = 8.5
 jump_gravity = 23.0
 air_strafe_angle_speed = SubResource("Curve_k53q1")
-air_strafe_speed_mult = 0.08
+air_strafe_speed_mult = 3.0
 air_strafe_speed_scaler = SubResource("Curve_fhl08")
 air_strafe_max_angle = 1.5
 air_strafe_max_angle_increaser = SubResource("Curve_w7u6u")
@@ -53,13 +58,24 @@ script = ExtResource("4_gwnis")
 [node name="jump" type="Node" parent="MovementStateMachine" unique_id=910536443]
 script = ExtResource("5_k53q1")
 
-[node name="camera_twist" type="Node3D" parent="." unique_id=1521490860]
+[node name="WeaponController" type="Node3D" parent="." unique_id=1407512076 node_paths=PackedStringArray("cam_ray")]
+script = ExtResource("6_od3ui")
+cam_ray = NodePath("../camera_twist/camera_pitch/camera_pos/CamPos")
 
-[node name="camera_pitch" type="Node3D" parent="camera_twist" unique_id=1371084902]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="WeaponStateMachine" type="Node" parent="WeaponController" unique_id=1172005518 node_paths=PackedStringArray("parent")]
+script = ExtResource("2_btcbx")
+parent = NodePath("..")
+start_state = "nonshoot"
+print_state = true
 
-[node name="camera_pos" type="Node3D" parent="camera_twist/camera_pitch" unique_id=184796847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.552717, 1.2445507, 3.8639383)
+[node name="nonshoot" type="Node" parent="WeaponController/WeaponStateMachine" unique_id=2064771483]
+script = ExtResource("6_fhl08")
+
+[node name="shoot" type="Node" parent="WeaponController/WeaponStateMachine" unique_id=375249752]
+script = ExtResource("7_vtle1")
+
+[node name="ShootRay" type="RayCast3D" parent="WeaponController" unique_id=822944392]
+top_level = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=128669083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -68,3 +84,19 @@ shape = SubResource("CylinderShape3D_ry41o")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1643996000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_ry41o")
+
+[node name="ModelTwist" type="Node3D" parent="." unique_id=323293110]
+
+[node name="camera_twist" type="Node3D" parent="." unique_id=1521490860]
+
+[node name="camera_pitch" type="Node3D" parent="camera_twist" unique_id=1371084902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="camera_pos" type="Node3D" parent="camera_twist/camera_pitch" unique_id=184796847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7372241, 1.2449999, 3.864)
+
+[node name="CamPos" type="RayCast3D" parent="camera_twist/camera_pitch/camera_pos" unique_id=540265392]
+visible = false
+target_position = Vector3(0, 0, -256)
+collision_mask = 2
+collide_with_areas = true

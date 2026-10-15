@@ -9,8 +9,12 @@ class_name Player
 @onready var cam_pitch := $camera_twist/camera_pitch
 @onready var cam_pos := $camera_twist/camera_pitch/camera_pos
 var mouse_dir: Vector2
-var camera_dir: Vector2
-var cam_smooth: float = 0.5
+var camera_input_dir: Vector2
+var cam_smooth: float = 5
+
+var camera_dir: Vector3 # the one to use
+var camera_basis: Basis # the one to use
+var hor_camera_dir: Vector3 
 
 #movement
 var input_dir: Vector2 = Vector2.ZERO
@@ -32,11 +36,13 @@ var target_speed: float = 0.0
 @export_range(0, 30, 0.05) var jump_pulse: float = 5.
 @export_range(0, 30, 0.05) var jump_gravity: float = 5.
 @export var air_strafe_angle_speed: Curve # the main one
-@export_range(0, 1, 0.001) var air_strafe_speed_mult: float = 0.3
+@export_range(0, 10, 0.001) var air_strafe_speed_mult: float = 0.3
 @export var air_strafe_speed_scaler: Curve # the on ethat limits it
 @export_range(0, 10, 0.01) var air_strafe_max_angle: float = 0.4
 @export var air_strafe_max_angle_increaser: Curve
 
+
+@export_category("Weapon Handler")
 
 func _ready():
 	movement_state_machine.init()
@@ -45,12 +51,18 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			mouse_dir = InputHandler.get_mouse_camera_dir(event)
-	camera_dir = lerp(camera_dir, InputHandler.get_controller_camera_dir(), cam_smooth)
+	camera_input_dir = lerp(camera_input_dir, InputHandler.get_controller_camera_dir(), cam_smooth)
+	movement_state_machine.process_input(event)
 
 func _process(delta: float) -> void:
 	#camera controls
-	cam_twist.rotate_y(-camera_dir.x - mouse_dir.x)
-	cam_pitch.rotate_x(-camera_dir.y - mouse_dir.y)
+	cam_twist.rotate_y(-camera_input_dir.x - mouse_dir.x)
+	cam_pitch.rotate_x(-camera_input_dir.y - mouse_dir.y)
+	
+	camera_dir = -cam_pos.global_basis.z
+	camera_basis = cam_pos.global_basis
+	hor_camera_dir = Vector3.FORWARD.rotated(Vector3.UP, cam_twist.rotation.y)
+	
 	#pitch clamp values
 	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -PI/2, PI/2)
 	mouse_dir = Vector2.ZERO
@@ -92,7 +104,7 @@ func vel_air_strafe(vel: Vector3, dir: Vector3, delta: float) -> Vector3:
 	else:
 		dot = 1
 	
-	var new_speed: float = vel.length() + (air_strafe_speed_mult * air_strafe_angle_speed.sample(dot) * air_strafe_speed_scaler.sample(speed))
+	var new_speed: float = vel.length() + (air_strafe_speed_mult * air_strafe_angle_speed.sample(dot) * air_strafe_speed_scaler.sample(speed) * delta)
 	
 	var angle_diff: float = rad_to_deg(vel.signed_angle_to(dir, Vector3.UP))
 	var max_angle_change: float = air_strafe_max_angle*air_strafe_max_angle_increaser.sample(dot)

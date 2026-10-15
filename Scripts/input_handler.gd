@@ -23,6 +23,8 @@ func _input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("jump"):
 		buffered_inputs["jump"] = 7
+	if Input.is_action_just_pressed("shoot"):
+		buffered_inputs["shoot"] = 7
 	
 	if Input.is_action_just_pressed("ui_cancel") && event.is_action("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

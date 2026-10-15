@@ -14,6 +14,8 @@ texture_filter = 1
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=155220428]
 use_collision = true
+collision_layer = 3
+collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=652285737]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -76.49999, -0.5, 0)

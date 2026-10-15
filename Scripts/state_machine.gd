@@ -18,7 +18,7 @@ func init():
 		child.parent = parent
 		states[str(child.name).to_lower()] = child
 	
-	prev_state = states["idle"]
+	#prev_state = states.
 	print(states)
 	change_state(start_state)
 
@@ -43,3 +43,6 @@ func process_physics(delta: float):
 
 func process_frame(delta: float):
 	cur_state.process_frame(delta)
+
+func process_input(event: InputEvent):
+	cur_state.process_input(event)
