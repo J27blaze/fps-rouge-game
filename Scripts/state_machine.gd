@@ -23,6 +23,7 @@ func init():
 	change_state(start_state)
 
 func change_state(new_state: String, transfer_data = null):
+	if cur_state == states[new_state]: return
 	if cur_state:
 		cur_state.exit()
 		prev_state = cur_state

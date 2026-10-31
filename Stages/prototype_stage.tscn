@@ -18,18 +18,28 @@ collision_layer = 3
 collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=652285737]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -76.49999, -0.5, 0)
-size = Vector3(226, 1, 81)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 2.000002, -0.5, 0)
+size = Vector3(69, 1, 81)
+material = SubResource("StandardMaterial3D_xe7ef")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1972227293]
+transform = Transform3D(0.9848077, 0.17364818, 0, -0.1736482, 0.98480785, 0, 0, 0, 0.9999999, -60.498653, 4.5303907, 0)
+size = Vector3(63, 1, 81)
 material = SubResource("StandardMaterial3D_xe7ef")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1382779648]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.5, -23.999998)
-size = Vector3(73, 1, 33)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.49999997, 0.5, -23.999998)
+size = Vector3(74, 1, 33)
 material = SubResource("StandardMaterial3D_xe7ef")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=751667636]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 2.5, -29.499998)
-size = Vector3(73, 3, 22)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -9.499999, 2.5, -29.499998)
+size = Vector3(92, 3, 22)
+material = SubResource("StandardMaterial3D_xe7ef")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2110872007]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 25, -37.499996)
+size = Vector3(73, 42, 6)
 material = SubResource("StandardMaterial3D_xe7ef")
 
 [node name="Player" parent="." unique_id=967936490 instance=ExtResource("1_5iwml")]

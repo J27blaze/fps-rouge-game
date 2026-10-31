@@ -5,7 +5,6 @@ var player: Player:
 
 func start():
 	player.velocity.y = player.jump_pulse
-	InputHandler.clear_action_buffer("jump")
 	
 func exit():
 	pass

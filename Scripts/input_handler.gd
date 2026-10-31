@@ -15,6 +15,7 @@ func _physics_process(delta: float) -> void:
 			if buffered_inputs[input] > 0:
 				buffered_inputs[input] -= 1
 
+var debug_draw: bool = true
 func _input(event: InputEvent) -> void:
 	#if InputEvent is InputEventAction:
 	
@@ -31,6 +32,11 @@ func _input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if Input.is_action_just_pressed("ui_focus_next") && event.is_action("ui_focus_next"):
+		debug_draw = !debug_draw
+		DebugDraw3D.set_debug_enabled(debug_draw)
+		get_tree().debug_collisions_hint = not get_tree().debug_collisions_hint
 	pass
 
 #function can only work in process_phyisics, and not process_input

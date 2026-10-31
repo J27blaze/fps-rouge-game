@@ -7,20 +7,20 @@ var transfer_data #any data type
 var timer: float = 0.0
 
 # ready state
-func init():
+func init() -> void:
 	pass
 
 # enter state
-func start():
+func start() -> void:
 	pass
-func timer_reset():
+func timer_reset() -> void:
 	timer = 0
 
 # exit state
-func exit():
+func exit() -> void:
 	pass
 
-func change_state(state: String, transfer_data = null):
+func change_state(state: String, transfer_data = null) -> void:
 	state_machine.change_state(state, transfer_data)
 	
 # process_input

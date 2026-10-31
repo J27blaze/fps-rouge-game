@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 
 
 #movement functions
-func vel_move_toward(target_vector: Vector3, accel: float, delta: float):
+func vel_move_toward(target_vector: Vector3, accel: float, delta: float) -> void:
 	velocity.x = velocity.move_toward(target_vector, accel * delta).x
 	velocity.z = velocity.move_toward(target_vector, accel * delta).z
 
@@ -122,6 +122,7 @@ func vel_air_strafe(vel: Vector3, dir: Vector3, delta: float) -> Vector3:
 func state_check_jump() -> bool:
 	if InputHandler.is_action_buffered("jump") && is_on_floor():
 		movement_state_machine.change_state("jump")
+		InputHandler.clear_action_buffer("jump")
 		return true
 	return false
 

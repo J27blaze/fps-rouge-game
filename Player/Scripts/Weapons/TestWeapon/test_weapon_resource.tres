@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://xenwrkxc7ylc"]
+
+[ext_resource type="Script" uid="uid://m1mbfmxom8xa" path="res://Player/Scripts/Weapons/weapon_resource.gd" id="1_4ggke"]
+[ext_resource type="PackedScene" uid="uid://bpp5b7fijbti2" path="res://Player/Scripts/Weapons/TestWeapon/test_weapon.tscn" id="1_k0wbl"]
+
+[resource]
+script = ExtResource("1_4ggke")
+base_mag_size = 5.0
+base_reload_length = 0.5
+metadata/_custom_type_script = "uid://m1mbfmxom8xa"
