@@ -3,18 +3,13 @@ class_name Player
 
 #state machines
 @onready var movement_state_machine: StateMachine = $MovementStateMachine
+@onready var weapon_controller: WeaponController = $WeaponController
 
 #camera
-@onready var cam_twist := $camera_twist
-@onready var cam_pitch := $camera_twist/camera_pitch
-@onready var cam_pos := $camera_twist/camera_pitch/camera_pos
+@onready var cam_twist := weapon_controller.cam_twist
+@onready var cam_pitch := weapon_controller.cam_pitch
+@onready var cam_pos := weapon_controller.cam_pos
 var mouse_dir: Vector2
-var camera_input_dir: Vector2
-var cam_smooth: float = 5
-
-var camera_dir: Vector3 # the one to use
-var camera_basis: Basis # the one to use
-var hor_camera_dir: Vector3 
 
 #movement
 var input_dir: Vector2 = Vector2.ZERO
@@ -48,25 +43,9 @@ func _ready():
 	movement_state_machine.init()
 	
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			mouse_dir = InputHandler.get_mouse_camera_dir(event)
-	camera_input_dir = lerp(camera_input_dir, InputHandler.get_controller_camera_dir(), cam_smooth)
 	movement_state_machine.process_input(event)
 
 func _process(delta: float) -> void:
-	#camera controls
-	cam_twist.rotate_y(-camera_input_dir.x - mouse_dir.x)
-	cam_pitch.rotate_x(-camera_input_dir.y - mouse_dir.y)
-	
-	camera_dir = -cam_pos.global_basis.z
-	camera_basis = cam_pos.global_basis
-	hor_camera_dir = Vector3.FORWARD.rotated(Vector3.UP, cam_twist.rotation.y)
-	
-	#pitch clamp values
-	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -PI/2, PI/2)
-	mouse_dir = Vector2.ZERO
-	
 	input_dir = InputHandler.get_input_dir()
 	direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, cam_twist.rotation.y))
 	DebugDraw3D.draw_line(position, position + direction*5, Color.PURPLE)

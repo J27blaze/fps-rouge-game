@@ -14,7 +14,7 @@
 
 [sub_resource type="Curve" id="Curve_k53q1"]
 _limits = [-1.0, 1.0, -1.0, 1.0]
-_data = [Vector2(-1, -1), 0.0, 0.96061134, 0, 0, Vector2(-0.13148147, 0.88888884), 2.5, 2.5, 0, 0, Vector2(1.4901161e-08, 1), 0.0, -2.9683793, 0, 0, Vector2(0.27722764, 0.17708325), -2.9683793, -1.5284982, 0, 0, Vector2(0.5162561, -0.048611164), 0.0, 0.0, 0, 0, Vector2(1, -0.048611164), 0.0, 0.0, 0, 0]
+_data = [Vector2(-1, -1), 0.0, 5.8518543, 0, 0, Vector2(-0.24047619, 0.36986303), 0.0, 0.0, 0, 0, Vector2(1.4901161e-08, 1), 0.0, -2.9683793, 0, 0, Vector2(0.27722764, 0.17708325), -2.9683793, -1.5284982, 0, 0, Vector2(0.5162561, -0.048611164), 0.0, 0.0, 0, 0, Vector2(1, -0.048611164), 0.0, 0.0, 0, 0]
 point_count = 6
 
 [sub_resource type="Curve" id="Curve_fhl08"]
@@ -61,9 +61,8 @@ script = ExtResource("4_gwnis")
 [node name="jump" type="Node" parent="MovementStateMachine" unique_id=910536443]
 script = ExtResource("5_k53q1")
 
-[node name="WeaponController" type="Node3D" parent="." unique_id=1407512076 node_paths=PackedStringArray("cam_ray")]
+[node name="WeaponController" type="Node3D" parent="." unique_id=1407512076]
 script = ExtResource("6_od3ui")
-cam_ray = NodePath("../camera_twist/camera_pitch/camera_pos/CamPos")
 weapons = Array[ExtResource("7_x3vf3")]([ExtResource("8_apopc")])
 
 [node name="WeaponStateMachine" type="Node" parent="WeaponController" unique_id=1172005518 node_paths=PackedStringArray("parent")]
@@ -78,33 +77,23 @@ script = ExtResource("6_fhl08")
 [node name="shoot" type="Node" parent="WeaponController/WeaponStateMachine" unique_id=375249752]
 script = ExtResource("7_vtle1")
 
-[node name="ShootRay" type="RayCast3D" parent="WeaponController" unique_id=822944392]
-top_level = true
-visible = false
-
 [node name="ModelTwist" type="Node3D" parent="WeaponController" unique_id=323293110]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WeaponController/ModelTwist" unique_id=1643996000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_ry41o")
 
+[node name="camera_twist" type="Node3D" parent="WeaponController" unique_id=1521490860]
+
+[node name="camera_pitch" type="Node3D" parent="WeaponController/camera_twist" unique_id=1371084902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="camera_pos" type="Node3D" parent="WeaponController/camera_twist/camera_pitch" unique_id=184796847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7372241, 1.2449999, 3.864)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=128669083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_ry41o")
-
-[node name="camera_twist" type="Node3D" parent="." unique_id=1521490860]
-
-[node name="camera_pitch" type="Node3D" parent="camera_twist" unique_id=1371084902]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="camera_pos" type="Node3D" parent="camera_twist/camera_pitch" unique_id=184796847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7372241, 1.2449999, 3.864)
-
-[node name="CamPos" type="RayCast3D" parent="camera_twist/camera_pitch/camera_pos" unique_id=540265392]
-visible = false
-target_position = Vector3(0, 0, -256)
-collision_mask = 2
-collide_with_areas = true
 
 [node name="PlayerUI" type="Control" parent="." unique_id=2104709907]
 layout_mode = 3
