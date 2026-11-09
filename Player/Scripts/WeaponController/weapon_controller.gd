@@ -4,6 +4,24 @@ class_name WeaponController
 @onready var player : Player = get_parent()
 @onready var weapon_state_machine : StateMachine = $WeaponStateMachine
 
+# camera movement stuff
+@onready var cam_twist := $camera_twist
+@onready var cam_pitch := $camera_twist/camera_pitch
+@onready var cam_pos := $camera_twist/camera_pitch/camera_pos
+var target_cam_pos : Vector3 = Vector3.ZERO
+var cam_phy_inter: Physics_Interolate = Physics_Interolate.new()
+
+var mouse_dir: Vector2 = Vector2.ZERO
+var camera_input_dir: Vector2 = Vector2.ZERO
+#----
+var controller_cam_smooth: float = 0.9
+var controller_cam_scaler: float = 100
+
+var camera_dir: Vector3 # the one to use
+var camera_basis: Basis # the one to use
+
+var hor_camera_dir: Vector3 
+
 #get hit pos
 var cur_shoot_pos_offset: Vector3 = Vector3(1, 1, 0)
 var shoot_ray_pos: Vector3 = Vector3.ZERO
@@ -17,9 +35,10 @@ var weapon_index: int = 0
 
 func _ready() -> void:
 	weapon_state_machine.init()
-
+	cam_phy_inter.process_phy(global_position)
+	
 func _process(delta: float) -> void:
-	cam_mouse_move(delta)
+	#cam_mouse_move(delta)
 	#get_hit_pos()
 	
 	weapon_state_machine.process_frame(delta)
@@ -30,11 +49,16 @@ func _process(delta: float) -> void:
 	#DebugDraw3D.draw_line(cam_ray_pos, cam_ray_point, Color.YELLOW)
 	DebugDraw3D.draw_square(hit_pos, 0.2 ,Color.BLUE)
 	
-	weapon_state_machine.process_physics(delta)
+	cam_mouse_move(delta)
+	cam_twist.position = cam_phy_inter.cur_pos
+	target_cam_pos = cam_pos.global_position
+	
+	get_hit_pos()
 
 func _physics_process(delta: float) -> void:
-	#get_hit_pos()
-	pass
+	cam_phy_inter.process_phy(global_position)
+	
+	weapon_state_machine.process_physics(delta)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -43,21 +67,9 @@ func _input(event: InputEvent) -> void:
 	
 	weapon_state_machine.process_input(event)
 
-# camera movement stuff
-@onready var cam_twist := $camera_twist
-@onready var cam_pitch := $camera_twist/camera_pitch
-@onready var cam_pos := $camera_twist/camera_pitch/camera_pos
-var mouse_dir: Vector2 = Vector2.ZERO
-var camera_input_dir: Vector2 = Vector2.ZERO
-#----
-var controller_cam_smooth: float = 0.9
-var controller_cam_scaler: float = 100
-
-var camera_dir: Vector3 # the one to use
-var camera_basis: Basis # the one to use
-
-var hor_camera_dir: Vector3 
-func cam_mouse_move(delta: float) -> void:	
+func cam_mouse_move(delta: float) -> void:
+	cam_phy_inter.process_frame()
+	
 	camera_input_dir = lerp(camera_input_dir, InputHandler.get_controller_camera_dir() * delta * controller_cam_scaler, controller_cam_smooth)
 	
 	#camera controls
@@ -84,11 +96,11 @@ func get_hit_pos() -> void:
 	if !cam_col:
 		cam_ray_point = cam_ray_end
 		hit_pos = cam_ray_point
-		print("null point")
+		#print("null point")
 		return
 	else: 
 		cam_ray_point = cam_col.position
-		print(cam_col.position)
+		#print(cam_col.position)
 		
 		var shoot_ray_end : Vector3 = cam_ray_point
 		var shoot_query = PhysicsRayQueryParameters3D.create(shoot_ray_pos, shoot_ray_end)

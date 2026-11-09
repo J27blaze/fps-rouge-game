@@ -84,6 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_ry41o")
 
 [node name="camera_twist" type="Node3D" parent="WeaponController" unique_id=1521490860]
+top_level = true
 
 [node name="camera_pitch" type="Node3D" parent="WeaponController/camera_twist" unique_id=1371084902]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

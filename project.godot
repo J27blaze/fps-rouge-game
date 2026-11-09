@@ -105,7 +105,8 @@ shoot={
 
 [physics]
 
-common/physics_jitter_fix=0.01
+common/max_physics_steps_per_frame=1
+common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 
