@@ -8,7 +8,6 @@ class_name WeaponController
 @onready var cam_twist := $camera_twist
 @onready var cam_pitch := $camera_twist/camera_pitch
 @onready var cam_pos := $camera_twist/camera_pitch/camera_pos
-var target_cam_pos : Vector3 = Vector3.ZERO
 var cam_phy_inter: Physics_Interolate = Physics_Interolate.new()
 
 var mouse_dir: Vector2 = Vector2.ZERO
@@ -35,7 +34,7 @@ var weapon_index: int = 0
 
 func _ready() -> void:
 	weapon_state_machine.init()
-	cam_phy_inter.process_phy(global_position)
+	cam_phy_inter.process_phy(player.position)
 	
 func _process(delta: float) -> void:
 	#cam_mouse_move(delta)
@@ -43,20 +42,19 @@ func _process(delta: float) -> void:
 	
 	weapon_state_machine.process_frame(delta)
 	
+	cam_mouse_move(delta)
+	cam_twist.position = cam_phy_inter.inter_pos
+	get_hit_pos()
+	
 	DebugDraw3D.draw_square(shoot_ray_pos, 0.1, Color.RED)
 	DebugDraw3D.draw_line(shoot_ray_pos, hit_pos, Color.BLUE)
-	DebugDraw3D.draw_square(cam_ray_point, 0.3, Color.YELLOW)
+	DebugDraw3D.draw_square(hit_pos, 0.3 ,Color.YELLOW)
+	DebugDraw3D.draw_square(cam_ray_point, 0.2, Color.BLUE)
 	#DebugDraw3D.draw_line(cam_ray_pos, cam_ray_point, Color.YELLOW)
-	DebugDraw3D.draw_square(hit_pos, 0.2 ,Color.BLUE)
-	
-	cam_mouse_move(delta)
-	cam_twist.position = cam_phy_inter.cur_pos
-	target_cam_pos = cam_pos.global_position
-	
-	get_hit_pos()
+	#print(cam_phy_inter.cur_pos)
 
 func _physics_process(delta: float) -> void:
-	cam_phy_inter.process_phy(global_position)
+	cam_phy_inter.process_phy(player.position)
 	
 	weapon_state_machine.process_physics(delta)
 
@@ -111,6 +109,7 @@ func get_hit_pos() -> void:
 		else:
 			hit_pos = cam_ray_point
 		
+		print(hit_pos)
 		return
 
 func shoot() -> void:

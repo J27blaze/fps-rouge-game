@@ -63,7 +63,9 @@ func _physics_process(delta: float) -> void:
 
 	DebugDraw2D.set_text("Speed", snapped(speed, 0.01))
 	DebugDraw2D.set_text("Target_Speed", snapped(target_speed, 0.01))
-
+	
+	DebugDraw2D.set_text("FPS", snapped(Engine.get_frames_per_second(), 0.1))
+	DebugDraw2D.set_text("PPS", snapped(Engine.get_physics_interpolation_fraction(), 0.00000001))
 # --------------------------------------------------------------------------------------------------------------------------- #
 
 

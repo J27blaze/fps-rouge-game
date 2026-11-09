@@ -11,6 +11,7 @@ uv2_triplanar = true
 texture_filter = 1
 
 [node name="prototype_stage" type="Node" unique_id=1475399487]
+physics_interpolation_mode = 1
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=155220428]
 use_collision = true
@@ -46,6 +47,7 @@ material = SubResource("StandardMaterial3D_xe7ef")
 unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2718249 node_paths=PackedStringArray("player")]
+physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 3.2942, 7.8509645)
 script = ExtResource("1_c6hfo")
 player = NodePath("../Player")

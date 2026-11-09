@@ -6,10 +6,10 @@ var target_player: bool = true
 
 func _ready():
 	if target_player:
-		position = player.weapon_controller.target_cam_pos
+		position = player.cam_pos.global_position
 		rotation = player.cam_pos.global_rotation
 	
 func _process(delta: float) -> void:
 	if target_player:
-		position = player.weapon_controller.target_cam_pos
+		position = player.cam_pos.global_position
 		rotation = player.cam_pos.global_rotation

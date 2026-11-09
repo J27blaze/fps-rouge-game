@@ -1,11 +1,11 @@
 extends Object
 class_name Physics_Interolate
 
-var cur_pos: Vector3
-var prev_pos: Vector3
+var cur_pos: Vector3 = Vector3.ZERO
+var prev_pos: Vector3 = Vector3.ZERO
 
-var cur_rot: Vector3
-var prev_rot: Vector3
+var cur_rot: Vector3 = Vector3.ZERO
+var prev_rot: Vector3 = Vector3.ZERO
 
 var inter_pos: Vector3 = Vector3.ZERO
 var inter_rot: Vector3 = Vector3.ZERO
