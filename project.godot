@@ -33,6 +33,7 @@ window/stretch/aspect="expand"
 [file_customization]
 
 folder_colors={
+"res://Enemies/": "yellow",
 "res://Player/": "red",
 "res://Player/Scripts/WeaponController/": "orange",
 "res://Player/Scripts/Weapons/": "pink",
@@ -101,7 +102,11 @@ shoot={
 [layer_names]
 
 2d_navigation/layer_1="Shootable"
+3d_physics/layer_1="env"
 2d_navigation/layer_2="Env"
+3d_physics/layer_2="player"
+3d_physics/layer_3="enemies_col"
+3d_physics/layer_4="shootable"
 
 [physics]
 

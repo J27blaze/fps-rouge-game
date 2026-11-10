@@ -27,7 +27,11 @@ var shoot_ray_pos: Vector3 = Vector3.ZERO
 var cam_ray_pos: Vector3 = Vector3.ZERO
 var cam_ray_point: Vector3 = Vector3.ZERO
 
+#important hit collider stuff
 var hit_pos: Vector3 = Vector3.ZERO # THE ONE TO USE
+var hit_dir: Vector3 = Vector3.ZERO # THE ONE TO USE
+
+var hit_object: Node = null
 
 @export var weapons: Array[Weapon]
 var weapon_index: int = 0
@@ -35,6 +39,8 @@ var weapon_index: int = 0
 func _ready() -> void:
 	weapon_state_machine.init()
 	cam_phy_inter.process_phy(player.position)
+	
+	#weapons[weapon_index].model_scene
 	
 func _process(delta: float) -> void:
 	#cam_mouse_move(delta)
@@ -44,7 +50,7 @@ func _process(delta: float) -> void:
 	
 	cam_mouse_move(delta)
 	cam_twist.position = cam_phy_inter.inter_pos
-	get_hit_pos()
+	#get_hit_pos()
 	
 	DebugDraw3D.draw_square(shoot_ray_pos, 0.1, Color.RED)
 	DebugDraw3D.draw_line(shoot_ray_pos, hit_pos, Color.BLUE)
@@ -82,36 +88,55 @@ func cam_mouse_move(delta: float) -> void:
 	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -PI/2, PI/2)
 	mouse_dir = Vector2.ZERO
 	
-func get_hit_pos() -> void:
+func ray_cast_pos() -> void:
+	#bit1 = 1
+	#bit2 = 0
+	#bit3 = 0
+	#bit4 = 1
+	var collision_mask = 9
+	
 	cam_ray_pos = cam_pos.global_position
 	shoot_ray_pos = Vector3.UP + player.position
 	var cam_ray_end = cam_ray_pos - cam_pos.global_transform.basis.z * 256
-	
 	var space = get_world_3d().direct_space_state
-	var cam_query = PhysicsRayQueryParameters3D.create(cam_ray_pos, cam_ray_end)
+	var cam_query = PhysicsRayQueryParameters3D.create(cam_ray_pos, cam_ray_end, collision_mask)
+	cam_query.set_collide_with_areas(true)
 	var cam_col = space.intersect_ray(cam_query)
 	
 	if !cam_col:
 		cam_ray_point = cam_ray_end
 		hit_pos = cam_ray_point
 		#print("null point")
-		return
+		hit_object = null
 	else: 
 		cam_ray_point = cam_col.position
 		#print(cam_col.position)
 		
 		var shoot_ray_end : Vector3 = cam_ray_point
-		var shoot_query = PhysicsRayQueryParameters3D.create(shoot_ray_pos, shoot_ray_end)
+		var shoot_query = PhysicsRayQueryParameters3D.create(shoot_ray_pos, shoot_ray_end, collision_mask)
+		shoot_query.set_collide_with_areas(true)
 		var shoot_col = space.intersect_ray(shoot_query)
 		
 		if shoot_col:
 			hit_pos = shoot_col.position
+			
+			hit_object = shoot_col.collider
 		else:
 			hit_pos = cam_ray_point
+			
+			hit_object = cam_col.collider
 		
-		print(hit_pos)
+	#print(hit_object)
+	hit_dir = shoot_ray_pos.direction_to(hit_pos)
+
+func ray_cast_damage():
+	if !hit_object:
 		return
+	else:
+		if hit_object is Shootable:
+			hit_object.on_hit()
 
 func shoot() -> void:
-	get_hit_pos()
+	ray_cast_pos()
+	ray_cast_damage()
 	pass
