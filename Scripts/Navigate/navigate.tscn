@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://v8x6h8s4kq35"]
+
+[ext_resource type="Script" uid="uid://cwdsau2s652jj" path="res://Scripts/Navigate/navigate.gd" id="1_ia21r"]
+
+[node name="navigate" type="Node3D" unique_id=832220906]
+script = ExtResource("1_ia21r")

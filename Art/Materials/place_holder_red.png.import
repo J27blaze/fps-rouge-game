@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0c0uff5e4k2j"
-path.s3tc="res://.godot/imported/place_holder_grey.png-ad092e524b1ee3f588e556c0c7726019.s3tc.ctex"
+uid="uid://b6ph3sdym3duh"
+path.s3tc="res://.godot/imported/place_holder_red.png-f34dac1227d159a6f63c764e7ed86f8b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Materials/Place_holder_grey/place_holder_grey.png"
-dest_files=["res://.godot/imported/place_holder_grey.png-ad092e524b1ee3f588e556c0c7726019.s3tc.ctex"]
+source_file="res://Art/Materials/place_holder_red.png"
+dest_files=["res://.godot/imported/place_holder_red.png-f34dac1227d159a6f63c764e7ed86f8b.s3tc.ctex"]
 
 [params]
 

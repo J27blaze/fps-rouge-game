@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://be0gtm75voess" path="res://Player/player.tscn" id="1_5iwml"]
 [ext_resource type="Script" uid="uid://dvgh52nfp6p7t" path="res://Scripts/cam_controller.gd" id="1_c6hfo"]
-[ext_resource type="Texture2D" uid="uid://d0c0uff5e4k2j" path="res://Art/Materials/Place_holder_grey/place_holder_grey.png" id="1_w7u6u"]
+[ext_resource type="Texture2D" uid="uid://d0c0uff5e4k2j" path="res://Art/Materials/place_holder_grey.png" id="1_w7u6u"]
 [ext_resource type="PackedScene" uid="uid://bt73dfaecmjfh" path="res://Enemies/TestEnemy/test_enemy.tscn" id="4_e6842"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xe7ef"]
@@ -54,5 +54,20 @@ player = NodePath("../Player")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1233375089]
 transform = Transform3D(1, 0, 0, 0, 0.129057, 0.9916372, 0, -0.9916372, 0.129057, 0, 16.188948, 9.599947)
 
-[node name="test_enemy" parent="." unique_id=573009701 instance=ExtResource("4_e6842")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, 9)
+[node name="test_enemy3" parent="." unique_id=573009701 instance=ExtResource("4_e6842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 27)
+
+[node name="test_enemy2" parent="." unique_id=299569867 instance=ExtResource("4_e6842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 18)
+
+[node name="test_enemy" parent="." unique_id=1657319128 instance=ExtResource("4_e6842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 9)
+
+[node name="test_enemy4" parent="." unique_id=1275155644 instance=ExtResource("4_e6842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 14)
+
+[node name="test_enemy5" parent="." unique_id=1932836917 instance=ExtResource("4_e6842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 21)
+
+[node name="test_enemy6" parent="." unique_id=705690474 instance=ExtResource("4_e6842")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 23)
