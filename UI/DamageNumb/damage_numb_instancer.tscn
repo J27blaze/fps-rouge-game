@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bcqu5ltbhj4qp"]
+
+[ext_resource type="Script" uid="uid://dq2r6gbtlwmr7" path="res://UI/DamageNumb/damage_numb_instancer.gd" id="1_fwmwa"]
+
+[node name="damage_numb_instancer" type="Node" unique_id=83639603]
+script = ExtResource("1_fwmwa")
+
+[node name="delay" type="Timer" parent="." unique_id=1153100451]
+wait_time = 0.55
+one_shot = true
+
+[connection signal="timeout" from="delay" to="." method="_on_delay_timeout"]

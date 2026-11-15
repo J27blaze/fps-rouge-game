@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b8b6o60fsynub"]
+
+[ext_resource type="Script" uid="uid://vkkjbbqqvnr0" path="res://UI/DamageNumb/damage_numb.gd" id="1_4qq5u"]
+[ext_resource type="FontFile" uid="uid://bn0s2gdg6ojvd" path="res://UI/Fonts/ZenDots-Regular.ttf" id="2_16ay0"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ry41o"]
+size = Vector2(0.25, 0.063)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_khcc3"]
+viewport_path = NodePath("sub_viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnra7"]
+resource_local_to_scene = true
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_khcc3")
+texture_filter = 1
+billboard_mode = 1
+billboard_keep_scale = true
+grow = true
+fixed_size = true
+point_size = 0.1
+proximity_fade_distance = 0.01
+
+[sub_resource type="Theme" id="Theme_2k0v8"]
+default_font = ExtResource("2_16ay0")
+
+[node name="damage_numb" type="MeshInstance3D" unique_id=355372243]
+top_level = true
+mesh = SubResource("QuadMesh_ry41o")
+surface_material_override/0 = SubResource("StandardMaterial3D_gnra7")
+script = ExtResource("1_4qq5u")
+length = 0.5
+height = 0.65
+
+[node name="sub_viewport" type="SubViewport" parent="." unique_id=512089926]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(512, 128)
+
+[node name="text" type="RichTextLabel" parent="sub_viewport" unique_id=563859295]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.00024414063
+offset_bottom = -0.00024414063
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2k0v8")
+theme_override_constants/outline_size = 83
+theme_override_font_sizes/normal_font_size = 100
+text = "12345"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

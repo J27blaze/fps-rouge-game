@@ -37,7 +37,8 @@ folder_colors={
 "res://Player/": "red",
 "res://Player/Scripts/WeaponController/": "orange",
 "res://Player/Scripts/Weapons/": "pink",
-"res://Stages/": "gray"
+"res://Stages/": "gray",
+"res://UI/": "blue"
 }
 
 [input]

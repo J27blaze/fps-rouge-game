@@ -21,17 +21,18 @@ var cur_navi_dir: Vector3 = Vector3.ZERO
 @export_range(0, 30, 0.05) var chase_speed: float = 10
 @export_range(0, 5, 0.01) var fall_speed: float = 9.8
 
-func on_hit():
-	health -= 10
+func on_hit(damage: float, hit_position: Vector3):
+	health -= damage
 
 func process_physics(delta: float) -> void:
 	move_and_slide()
 	if health <= 0:
 		queue_free()
+		return
 	
 	if physics_frame % navi_mod == 0:
 		navigate.target_position = player.position
-		print(player.position)
+		#print(player.position)
 		target_navi_dir = navigate.get_navigate_dir()*chase_speed
 	
 	cur_navi_dir = lerp(cur_navi_dir, target_navi_dir, 5 * delta)

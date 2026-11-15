@@ -134,7 +134,7 @@ func ray_cast_damage():
 		return
 	else:
 		if hit_object is Shootable:
-			hit_object.on_hit()
+			hit_object.on_hit(randf_range(10, 22), hit_pos)
 
 func shoot() -> void:
 	ray_cast_pos()
