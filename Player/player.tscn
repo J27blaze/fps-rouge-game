@@ -98,7 +98,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="camera_pos" type="Node3D" parent="WeaponController/camera_twist/camera_pitch" unique_id=184796847]
 physics_interpolation_mode = 2
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7372241, 1.2449999, 3.864)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6218665, 0.94328165, 3.991771)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=128669083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

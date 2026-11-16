@@ -8,11 +8,7 @@ var physics_frame: int = 0
 @export_range(1, 60) var navigation_querys_per_second: int = 3
 @onready var navi_mod: int = Engine.get_physics_ticks_per_second()/navigation_querys_per_second
 @onready var navigate: Custom_Navigate = $navigate
-@onready var player: Player
-#bad code REALLY BAD CODE LL
-func _ready():
-	var level = get_parent()
-	player = level.get_node("Player")
+@onready var player: Player = GameManager.player
 var target_navi_dir: Vector3 = Vector3.ZERO
 var cur_navi_dir: Vector3 = Vector3.ZERO
 

@@ -1,19 +1,16 @@
 extends Node
-var camera_controller_sensitivity = 0.04
+var camera_controller_sensitivity = 0.07
 var camera_mouse_sensitivity = 0.001
 
-var buffered_inputs: Dictionary[String, int]
+var buffered_inputs: Dictionary[String, float]
 
 func _process(delta: float) -> void:
-	pass
-
-func _physics_process(delta: float) -> void:
 	#print(buffered_inputs)
 	if !buffered_inputs.is_empty():
 		for input in buffered_inputs:
 			
 			if buffered_inputs[input] > 0:
-				buffered_inputs[input] -= 1
+				buffered_inputs[input] -= delta*60
 
 var debug_draw: bool = true
 func _input(event: InputEvent) -> void:
@@ -25,7 +22,9 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("jump"):
 		buffered_inputs["jump"] = 7
 	if Input.is_action_just_pressed("shoot"):
-		buffered_inputs["shoot"] = 7
+		buffered_inputs["shoot"] = 20
+	if Input.is_action_just_pressed("reload"):
+		buffered_inputs["reload"] = 20
 	
 	if Input.is_action_just_pressed("ui_cancel") && event.is_action("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

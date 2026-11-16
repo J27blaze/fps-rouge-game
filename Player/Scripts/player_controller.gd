@@ -36,8 +36,10 @@ var target_speed: float = 0.0
 @export_range(0, 10, 0.01) var air_strafe_max_angle: float = 0.4
 @export var air_strafe_max_angle_increaser: Curve
 
-
 @export_category("Weapon Handler")
+
+func _init() -> void:
+	GameManager.player = self
 
 func _ready():
 	movement_state_machine.init()

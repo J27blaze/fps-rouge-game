@@ -12,7 +12,7 @@ var cam_phy_inter: Physics_Interolate = Physics_Interolate.new()
 
 var mouse_dir: Vector2 = Vector2.ZERO
 var camera_input_dir: Vector2 = Vector2.ZERO
-#----
+
 var controller_cam_smooth: float = 0.9
 var controller_cam_scaler: float = 100
 
@@ -35,6 +35,7 @@ var hit_object: Node = null
 
 @export var weapons: Array[Weapon]
 var weapon_index: int = 0
+@onready var cur_weapon: Weapon = weapons[weapon_index]
 
 func _ready() -> void:
 	weapon_state_machine.init()
@@ -43,14 +44,10 @@ func _ready() -> void:
 	#weapons[weapon_index].model_scene
 	
 func _process(delta: float) -> void:
-	#cam_mouse_move(delta)
-	#get_hit_pos()
-	
+	cam_mouse_move(delta)
 	weapon_state_machine.process_frame(delta)
 	
-	cam_mouse_move(delta)
 	cam_twist.position = cam_phy_inter.inter_pos
-	#get_hit_pos()
 	
 	DebugDraw3D.draw_square(shoot_ray_pos, 0.1, Color.RED)
 	DebugDraw3D.draw_line(shoot_ray_pos, hit_pos, Color.BLUE)
@@ -71,6 +68,10 @@ func _input(event: InputEvent) -> void:
 	
 	weapon_state_machine.process_input(event)
 
+var current_recoil: Vector2 = Vector2.ZERO
+var target_recoil: Vector2 = Vector2.ZERO
+var spray_index: float = 0
+
 func cam_mouse_move(delta: float) -> void:
 	cam_phy_inter.process_frame()
 	
@@ -83,6 +84,11 @@ func cam_mouse_move(delta: float) -> void:
 	camera_dir = -cam_pos.global_basis.z
 	camera_basis = cam_pos.global_basis
 	hor_camera_dir = Vector3.FORWARD.rotated(Vector3.UP, cam_twist.rotation.y)
+	
+	current_recoil = lerp(current_recoil, target_recoil, 0.95) #hard code i know
+	target_recoil = lerp(target_recoil, Vector2.ZERO, cur_weapon.recoil_smoothing * delta)
+	cam_twist.rotation.y += current_recoil.x * delta
+	cam_pitch.rotation.x += current_recoil.y * delta
 	
 	#pitch clamp values
 	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -PI/2, PI/2)
@@ -97,7 +103,7 @@ func ray_cast_pos() -> void:
 	
 	cam_ray_pos = cam_pos.global_position
 	shoot_ray_pos = Vector3.UP + player.position
-	var cam_ray_end = cam_ray_pos - cam_pos.global_transform.basis.z * 256
+	var cam_ray_end : Vector3 = cam_ray_pos - cam_pos.global_transform.basis.z * 256
 	var space = get_world_3d().direct_space_state
 	var cam_query = PhysicsRayQueryParameters3D.create(cam_ray_pos, cam_ray_end, collision_mask)
 	cam_query.set_collide_with_areas(true)
@@ -110,21 +116,35 @@ func ray_cast_pos() -> void:
 		hit_object = null
 	else: 
 		cam_ray_point = cam_col.position
-		#print(cam_col.position)
+	#print(cam_col.position)
+	
+	var shoot_ray_end : Vector3 = cam_ray_point
+	
+	# Get direction towards target
+	var shoot_direction = (shoot_ray_end - shoot_ray_pos).normalized()
+
+	# Generate random spray
+	var spray_amount: float = cur_weapon.spray_degree_by_bullet.sample(spray_index)*cur_weapon.spray_degree
+	var spray_x = deg_to_rad(randf_range(-spray_amount, spray_amount))
+	var spray_y = deg_to_rad(randf_range(-spray_amount, spray_amount))
+
+	# Rotate direction
+	shoot_direction = shoot_direction.rotated(Vector3.RIGHT, spray_x)
+	shoot_direction = shoot_direction.rotated(Vector3.UP, spray_y)
+
+	# Calculate new endpoint
+	shoot_ray_end = shoot_ray_pos + shoot_direction * 256
+	
+	var shoot_query = PhysicsRayQueryParameters3D.create(shoot_ray_pos, shoot_ray_end, collision_mask)
+	shoot_query.set_collide_with_areas(true)
+	var shoot_col = space.intersect_ray(shoot_query)
+	
+	if shoot_col:
+		hit_pos = shoot_col.position
 		
-		var shoot_ray_end : Vector3 = cam_ray_point
-		var shoot_query = PhysicsRayQueryParameters3D.create(shoot_ray_pos, shoot_ray_end, collision_mask)
-		shoot_query.set_collide_with_areas(true)
-		var shoot_col = space.intersect_ray(shoot_query)
-		
-		if shoot_col:
-			hit_pos = shoot_col.position
-			
-			hit_object = shoot_col.collider
-		else:
-			hit_pos = cam_ray_point
-			
-			hit_object = cam_col.collider
+		hit_object = shoot_col.collider
+	else:
+		hit_pos = cam_ray_point
 		
 	#print(hit_object)
 	hit_dir = shoot_ray_pos.direction_to(hit_pos)
@@ -134,9 +154,26 @@ func ray_cast_damage():
 		return
 	else:
 		if hit_object is Shootable:
-			hit_object.on_hit(randf_range(10, 22), hit_pos)
+			hit_object.on_hit(cur_weapon.base_damage, hit_pos)
+		return
 
 func shoot() -> void:
-	ray_cast_pos()
-	ray_cast_damage()
-	pass
+	if cur_weapon.cur_mag_size <= 0:
+		return
+	else:
+		ray_cast_pos()
+		
+		cur_weapon.cur_mag_size -= 1
+		#camera code
+		target_recoil = (cur_weapon.reocoil + Vector2((randf()*2-1) * cur_weapon.recoil_variance.x, (randf()*2-1) * cur_weapon.recoil_variance.y))/10
+		spray_index += 1/cur_weapon.base_mag_size
+		
+		if cur_weapon.is_projectile:
+			ray_cast_damage()
+		else:
+			ray_cast_damage()
+
+func reload() -> void:
+	
+	cur_weapon.cur_mag_size = cur_weapon.base_mag_size
+	spray_index = 0

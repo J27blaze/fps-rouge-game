@@ -6,7 +6,7 @@
 script = ExtResource("1_fwmwa")
 
 [node name="delay" type="Timer" parent="." unique_id=1153100451]
-wait_time = 0.55
+wait_time = 0.3
 one_shot = true
 
 [connection signal="timeout" from="delay" to="." method="_on_delay_timeout"]

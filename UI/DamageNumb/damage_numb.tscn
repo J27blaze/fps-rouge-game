@@ -31,8 +31,11 @@ top_level = true
 mesh = SubResource("QuadMesh_ry41o")
 surface_material_override/0 = SubResource("StandardMaterial3D_gnra7")
 script = ExtResource("1_4qq5u")
+start_size = 1.05
 length = 0.5
 height = 0.65
+min_offset = Vector2(0.3, 0.3)
+max_offset = Vector2(0.45, 0.45)
 
 [node name="sub_viewport" type="SubViewport" parent="." unique_id=512089926]
 own_world_3d = true
@@ -43,10 +46,12 @@ size = Vector2i(512, 128)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -0.00024414063
-offset_bottom = -0.00024414063
+offset_top = -10.0
+offset_right = -3.0517578e-05
+offset_bottom = -10.000183
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.06283186
 theme = SubResource("Theme_2k0v8")
 theme_override_constants/outline_size = 83
 theme_override_font_sizes/normal_font_size = 100
