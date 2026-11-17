@@ -40,7 +40,11 @@ var weapon_index: int = 0
 func _ready() -> void:
 	weapon_state_machine.init()
 	cam_phy_inter.process_phy(player.position)
-	
+	#reset weapon w hard code
+	reload()
+	change_weapon(1)
+	reload()
+	change_weapon(-1)
 	#weapons[weapon_index].model_scene
 	
 func _process(delta: float) -> void:
@@ -174,6 +178,23 @@ func shoot() -> void:
 			ray_cast_damage()
 
 func reload() -> void:
-	
 	cur_weapon.cur_mag_size = cur_weapon.base_mag_size
 	spray_index = 0
+
+func change_weapon(index: int = 1) -> void:
+	if weapon_index + index >= weapons.size():
+		weapon_index = 0
+		cur_weapon = weapons[weapon_index]
+		print(cur_weapon.name)
+		return
+		
+	if weapon_index + index <= -1:
+		weapon_index = weapons.size()-1
+		cur_weapon = weapons[weapon_index]
+		print(cur_weapon.name)
+		return
+	
+	weapon_index += index
+	cur_weapon = weapons[weapon_index]
+	print(cur_weapon.name)
+	return

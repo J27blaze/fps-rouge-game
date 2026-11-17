@@ -25,7 +25,7 @@ func display_numb(damage: float, hit_pos: Vector3) -> void:
 	cur_numb += damage
 	
 	display.instance(cur_numb, hit_pos)
-	print(damage_numb_scenes)
+	#print(damage_numb_scenes)
 	delay.start()
 	
 	if damage_numb_index + 1 == max_amount_damage_numb: damage_numb_index = 0

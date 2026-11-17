@@ -26,6 +26,11 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("reload"):
 		buffered_inputs["reload"] = 20
 	
+	if Input.is_action_just_pressed("weapon_change_down"):
+		buffered_inputs["weapon_change_down"] = 20
+	if Input.is_action_just_pressed("weapon_change_up"):
+		buffered_inputs["weapon_change_up"] = 20
+	
 	if Input.is_action_just_pressed("ui_cancel") && event.is_action("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -38,7 +43,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().debug_collisions_hint = not get_tree().debug_collisions_hint
 	pass
 
-#function can only work in process_phyisics, and not process_input
+#function can only work in process or proccess_physics, and not process_input
 func is_action_buffered(input: String):
 	if buffered_inputs.has(input):
 		if buffered_inputs[input] > 0:

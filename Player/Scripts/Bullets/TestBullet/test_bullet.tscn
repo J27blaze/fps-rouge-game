@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bw3v2xgh3nk38"]
+
+[ext_resource type="Script" uid="uid://tjwx7p1dfheb" path="res://Player/Scripts/Bullets/bulletprojectile.gd" id="1_0vmv5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ry41o"]
+radius = 0.15
+
+[sub_resource type="SphereMesh" id="SphereMesh_ry41o"]
+radius = 0.05
+height = 0.15
+radial_segments = 12
+rings = 6
+
+[node name="test_bullet" type="Node3D" unique_id=1259240942]
+script = ExtResource("1_0vmv5")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=241679915]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=582148457]
+shape = SubResource("SphereShape3D_ry41o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1113355645]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_ry41o")

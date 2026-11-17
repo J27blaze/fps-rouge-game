@@ -20,3 +20,4 @@ func process_physics(delta: float) -> void:
 	else:
 		if timer >= weaponc.cur_weapon.base_fire_rate:
 			change_state("nonshoot")
+			return

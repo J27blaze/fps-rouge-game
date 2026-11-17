@@ -12,6 +12,8 @@ var cur_mag_size: int = 0
 	set(value):
 		is_projectile = value
 		notify_property_list_changed()
+@export var bullet_projectile: PackedScene
+@export_range(0, 1000, 0.5) var bullet_projectile_base_speed: float = 100.0
 
 @export_range(1, 100, 1) var base_damage: float = 0 # Make this Custom Damage Type
 @export_range(1, 100, 1) var base_mag_size: float = 0
@@ -28,8 +30,6 @@ var cur_mag_size: int = 0
 
 @export_range(0, 5, 0.01) var base_reload_length: float = 0
 
-@export var bullet_projectile: PackedScene
-
 @export var reocoil: Vector2 = Vector2.ZERO
 @export var recoil_variance: Vector2 = Vector2.ZERO
 @export_range(0, 15, 0.01) var recoil_smoothing: float = 15.0
@@ -45,7 +45,7 @@ func _validate_property(property: Dictionary) -> void:
 			# Removes the property from the Inspector while still saving its value
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 			
-	if property.name in ["bullet_projectile"]:
+	if property.name in ["bullet_projectile", "bullet_projectile_base_speed"]:
 		if not is_projectile:
 			# Removes the property from the Inspector while still saving its value
 			property.usage &= ~PROPERTY_USAGE_EDITOR
