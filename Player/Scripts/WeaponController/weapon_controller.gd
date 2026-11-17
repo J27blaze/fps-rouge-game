@@ -39,12 +39,13 @@ var weapon_index: int = 0
 
 func _ready() -> void:
 	weapon_state_machine.init()
-	cam_phy_inter.process_phy(player.position)
+	cam_phy_inter.init(player.position)
 	#reset weapon w hard code
 	reload()
 	change_weapon(1)
 	reload()
 	change_weapon(-1)
+	
 	#weapons[weapon_index].model_scene
 	
 func _process(delta: float) -> void:
@@ -160,6 +161,7 @@ func ray_cast_damage():
 		if hit_object is Shootable:
 			hit_object.on_hit(cur_weapon.base_damage, hit_pos)
 		return
+	# put this in the future BulletHitscan Class
 
 func shoot() -> void:
 	if cur_weapon.cur_mag_size <= 0:
@@ -173,7 +175,11 @@ func shoot() -> void:
 		spray_index += 1/cur_weapon.base_mag_size
 		
 		if cur_weapon.is_projectile:
-			ray_cast_damage()
+			cur_weapon.shoot_projectile(
+				shoot_ray_pos, hit_dir, 
+				cur_weapon.base_damage, 
+				cur_weapon.bullet_projectile_base_speed
+			)
 		else:
 			ray_cast_damage()
 

@@ -40,7 +40,8 @@ folder_colors={
 "res://Player/Scripts/WeaponController/": "orange",
 "res://Player/Scripts/Weapons/": "pink",
 "res://Stages/": "gray",
-"res://UI/": "blue"
+"res://UI/": "blue",
+"res://UI/PlayerUI/": "red"
 }
 
 [input]

@@ -10,10 +10,10 @@
 [ext_resource type="Script" uid="uid://ba13jo65pmik0" path="res://Player/Scripts/WeaponController/Weapon_States/shoot_state.gd" id="7_vtle1"]
 [ext_resource type="Script" uid="uid://m1mbfmxom8xa" path="res://Player/Scripts/Weapons/weapon_resource.gd" id="7_x3vf3"]
 [ext_resource type="Resource" uid="uid://xenwrkxc7ylc" path="res://Player/Scripts/Weapons/TestWeapon/test_weapon_resource.tres" id="8_apopc"]
-[ext_resource type="Texture2D" uid="uid://c41bsbl66lw06" path="res://icon.svg" id="9_00tjw"]
 [ext_resource type="Resource" uid="uid://w1lfj3wujfvx" path="res://Player/Scripts/Weapons/TestWeapon2/test_weapon2_resource.tres" id="9_p5o4e"]
 [ext_resource type="Script" uid="uid://5y70etnk6utv" path="res://Player/Scripts/WeaponController/Weapon_States/reload_state.gd" id="11_5htga"]
 [ext_resource type="Script" uid="uid://jws5ur8x7gel" path="res://Player/Scripts/WeaponController/Weapon_States/change_weapon_state.gd" id="13_gu6f8"]
+[ext_resource type="Texture2D" uid="uid://c5l1b0m7ybm6e" path="res://UI/PlayerUI/temp_crosshair.png" id="14_gu6f8"]
 
 [sub_resource type="Curve" id="Curve_k53q1"]
 _limits = [-1.0, 1.0, -1.0, 1.0]
@@ -73,7 +73,6 @@ weapons = Array[ExtResource("7_x3vf3")]([ExtResource("8_apopc"), ExtResource("9_
 script = ExtResource("2_btcbx")
 parent = NodePath("..")
 start_state = "nonshoot"
-print_state = true
 
 [node name="nonshoot" type="Node" parent="WeaponController/WeaponStateMachine" unique_id=2064771483]
 script = ExtResource("6_fhl08")
@@ -86,6 +85,7 @@ script = ExtResource("11_5htga")
 
 [node name="change_weapon" type="Node" parent="WeaponController/WeaponStateMachine" unique_id=1621856196]
 script = ExtResource("13_gu6f8")
+change_speed = 0.35
 
 [node name="ModelTwist" type="Node3D" parent="WeaponController" unique_id=323293110]
 
@@ -125,7 +125,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerUI/Control" unique_id=1716097508]
-modulate = Color(1, 1, 1, 0.49019608)
-scale = Vector2(0.155, 0.155)
-texture = ExtResource("9_00tjw")
+[node name="cross_hair" type="Sprite2D" parent="PlayerUI/Control" unique_id=1716097508]
+modulate = Color(0.7490196, 1, 0, 1)
+scale = Vector2(0.325, 0.325)
+texture = ExtResource("14_gu6f8")

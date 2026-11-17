@@ -15,7 +15,7 @@ var cur_mag_size: int = 0
 @export var bullet_projectile: PackedScene
 @export_range(0, 1000, 0.5) var bullet_projectile_base_speed: float = 100.0
 
-@export_range(1, 100, 1) var base_damage: float = 0 # Make this Custom Damage Type
+@export_range(1, 100, 0.1) var base_damage: float = 0 # Make this Custom Damage Type
 @export_range(1, 100, 1) var base_mag_size: float = 0
 @export_range(0, 5, 0.01) var base_fire_rate: float = 0
 
@@ -49,3 +49,12 @@ func _validate_property(property: Dictionary) -> void:
 		if not is_projectile:
 			# Removes the property from the Inspector while still saving its value
 			property.usage &= ~PROPERTY_USAGE_EDITOR
+
+func shoot_projectile(from: Vector3, direction: Vector3, damage: float, speed: float) -> void:
+	var bullet_instance : BulletProjectile = bullet_projectile.instantiate()
+	bullet_instance.dir = direction
+	bullet_instance.speed = speed
+	bullet_instance.position = from
+	bullet_instance.damage = damage
+	
+	GameManager.stage.add_child(bullet_instance)

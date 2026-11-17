@@ -3,7 +3,7 @@ class_name DamageNumbInstancer
 
 @onready var delay : Timer = $delay
 @onready var damage_numb: PackedScene = preload("res://UI/DamageNumb/damage_numb.tscn")
-@onready var world = get_tree().current_scene
+@onready var world = GameManager.stage
 var cur_numb: float = 0.0
 
 var damage_numb_scenes: Array[DamageNumb] = []
