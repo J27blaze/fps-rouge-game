@@ -1,5 +1,12 @@
 extends Node
 class_name ModiferBehaviour
 
-func on_receive_event(event: Event.Type):
-	print(event)
+var weapon: Weapon
+
+#weapon specific stuff
+var damage_flat_increase: float = 0.0
+var damage_x_increase: float = 1.0
+
+func on_receive_event(event: Event.Type) -> void:
+	#print(event)
+	pass

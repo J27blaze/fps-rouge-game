@@ -40,17 +40,20 @@ var cur_weapon: Weapon
 func _ready() -> void:
 	
 	weapons.resize(2)
-	weapons[0] = Weapon.new()
-	weapons[1] = Weapon.new(preload("uid://w1lfj3wujfvx"))
+	weapons[0] = Weapon.new() #hard code set the weapons
+	weapons[1] = Weapon.new(preload("uid://w1lfj3wujfvx")) #hard code set the weapons
 	cur_weapon = weapons[0]
 	
 	weapon_state_machine.init()
 	cam_phy_inter.init(player.position)
+	
 	#reset weapon w hard code
 	reload()
 	change_weapon(1)
+	cur_weapon.load_resource()
 	reload()
 	change_weapon(-1)
+	cur_weapon.load_resource()
 	
 	#weapons[weapon_index].model_scene
 	
@@ -165,7 +168,7 @@ func ray_cast_damage():
 		return
 	else:
 		if hit_object is Shootable:
-			hit_object.on_hit(cur_weapon.resource.base_damage, hit_pos)
+			hit_object.on_hit(cur_weapon.calc_damage(), hit_pos)
 		return
 	# put this in the future BulletHitscan Class
 
@@ -183,7 +186,7 @@ func shoot() -> void:
 		if cur_weapon.resource.is_projectile:
 			cur_weapon.load_projectile(
 				shoot_ray_pos, hit_dir, 
-				cur_weapon.resource.base_damage, 
+				cur_weapon.calc_damage(), 
 				cur_weapon.resource.bullet_projectile_base_speed
 			)
 		else:

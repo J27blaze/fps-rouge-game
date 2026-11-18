@@ -3,12 +3,17 @@ class_name Modifer
 
 #FAHH
 
-var resource: ModiferResource = preload("uid://fi2q1kq8kien")
+var weapon: Weapon
+
+var resource: ModiferResource
 var mod_behaviour: ModiferBehaviour
 
-func _ready() -> void:
+func _init(mod_resource: ModiferResource = preload("uid://fi2q1kq8kien")) -> void:
+	resource = mod_resource
+	
 	mod_behaviour = resource.mod_behaviour.new()
-
+	mod_behaviour.weapon = weapon
+	
 func connect_events() -> void:
 	for event in resource.event_connectors:
 		EventHandler.connect_event(self, event)
@@ -19,6 +24,6 @@ func disconnect_events() -> void:
 		EventHandler.disconnect_event(self, event)
 	return
 
-func on_receive_event(event: Event.Type):
+func on_receive_event(event: Event.Type) -> void:
 	mod_behaviour.on_receive_event(event)
 	return

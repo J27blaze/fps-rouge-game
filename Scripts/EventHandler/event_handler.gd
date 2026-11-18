@@ -2,7 +2,7 @@ extends Node
 
 # look at events.gd for all events
 
-var connected_event_receivers: Dictionary[Event.Type, Array] = {}
+var connected_event_receivers: Dictionary[int, Array] = {}
 const print_to_console: bool = false
 
 func call_event(event: Event.Type) -> void:
@@ -13,7 +13,7 @@ func call_event(event: Event.Type) -> void:
 #add batch connect
 func connect_event(receiver: EventReceiver, event: Event.Type) -> void:
 	if connected_event_receivers.has(event): 
-		var temp: Array[Event.Type] = connected_event_receivers[event]
+		var temp: Array = connected_event_receivers[event]
 		temp.append(receiver)
 		connected_event_receivers[event] = temp
 		return
@@ -26,7 +26,7 @@ func disconnect_event(receiver: EventReceiver, event: Event.Type) -> void:
 		print("!! Non existent")
 		return
 	else:
-		var temp: Array[Event.Type] = connected_event_receivers[event]
+		var temp: Array = connected_event_receivers[event]
 		temp.erase(receiver)
 		connected_event_receivers[event] = temp
 		return
