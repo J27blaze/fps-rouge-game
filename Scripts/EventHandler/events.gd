@@ -1,0 +1,6 @@
+class_name Event
+enum {
+	PLAYER_SHOOT,
+	PLAYER_START_RELOAD,
+	PLAYER_END_RELOAD
+}

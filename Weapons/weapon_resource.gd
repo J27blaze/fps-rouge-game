@@ -1,11 +1,12 @@
 @tool
 extends Resource
-class_name Weapon
-
-var cur_mag_size: int = 0
+class_name WeaponResource
 
 @export var name: String = "test_weapon"
-@export var model_scene: PackedScene = preload("res://Player/Scripts/Weapons/TestWeapon/test_weapon.tscn")
+@export var model_scene: PackedScene = preload("uid://bpp5b7fijbti2")
+@export var ui_asset: Texture2D
+@export var base_max_modifer_amount: int = 6
+
 @export_group("Gun Paramaters")
 
 @export var is_projectile: bool = false:
@@ -30,7 +31,7 @@ var cur_mag_size: int = 0
 
 @export_range(0, 5, 0.01) var base_reload_length: float = 0
 
-@export var reocoil: Vector2 = Vector2.ZERO
+@export var recoil: Vector2 = Vector2.ZERO
 @export var recoil_variance: Vector2 = Vector2.ZERO
 @export_range(0, 15, 0.01) var recoil_smoothing: float = 15.0
 
@@ -49,12 +50,3 @@ func _validate_property(property: Dictionary) -> void:
 		if not is_projectile:
 			# Removes the property from the Inspector while still saving its value
 			property.usage &= ~PROPERTY_USAGE_EDITOR
-
-func shoot_projectile(from: Vector3, direction: Vector3, damage: float, speed: float) -> void:
-	var bullet_instance : BulletProjectile = bullet_projectile.instantiate()
-	bullet_instance.dir = direction
-	bullet_instance.speed = speed
-	bullet_instance.position = from
-	bullet_instance.damage = damage
-	
-	GameManager.stage.add_child(bullet_instance)

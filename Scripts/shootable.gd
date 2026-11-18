@@ -7,7 +7,7 @@ class_name Shootable
 var damage_numb_instacer: DamageNumbInstancer
 
 func _ready():
-	var load: PackedScene = preload("res://UI/DamageNumb/damage_numb_instancer.tscn")
+	var load: PackedScene = preload("uid://bcqu5ltbhj4qp")
 	damage_numb_instacer = load.instantiate()
 	add_child(damage_numb_instacer)
 	
@@ -20,4 +20,4 @@ func on_hit(damage: float, hit_position: Vector3):
 		if damage_numb_instacer: damage_numb_instacer.display_numb(damage, hit_position)
 		return
 	else:
-		print(str(parent.name) + " has invalid shootable call!")
+		print("!! " + str(parent.name) + " has invalid shootable call!")

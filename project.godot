@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 InputHandler="*uid://clb1n71l7etk6"
 GameManager="*uid://c70wwjhmd0rvw"
+EventHandler="*uid://brun5ammttwaw"
 
 [debug_draw_3d]
 
@@ -28,20 +29,22 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=2
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="ignore"
 
 [file_customization]
 
 folder_colors={
 "res://Enemies/": "yellow",
+"res://Modifiers/": "green",
 "res://Player/": "red",
-"res://Player/Scripts/Bullets/": "yellow",
 "res://Player/Scripts/WeaponController/": "orange",
-"res://Player/Scripts/Weapons/": "pink",
 "res://Stages/": "gray",
 "res://UI/": "blue",
-"res://UI/PlayerUI/": "red"
+"res://UI/PlayerUI/": "red",
+"res://Weapons/": "pink",
+"res://Weapons/Bullets/": "yellow"
 }
 
 [input]

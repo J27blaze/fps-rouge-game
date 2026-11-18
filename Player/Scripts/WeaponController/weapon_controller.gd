@@ -33,11 +33,17 @@ var hit_dir: Vector3 = Vector3.ZERO # THE ONE TO USE
 
 var hit_object: Node = null
 
-@export var weapons: Array[Weapon]
+var weapons: Array[Weapon]
 var weapon_index: int = 0
-@onready var cur_weapon: Weapon = weapons[weapon_index]
+var cur_weapon: Weapon
 
 func _ready() -> void:
+	
+	weapons.resize(2)
+	weapons[0] = Weapon.new()
+	weapons[1] = Weapon.new(preload("uid://w1lfj3wujfvx"))
+	cur_weapon = weapons[0]
+	
 	weapon_state_machine.init()
 	cam_phy_inter.init(player.position)
 	#reset weapon w hard code
@@ -91,7 +97,7 @@ func cam_mouse_move(delta: float) -> void:
 	hor_camera_dir = Vector3.FORWARD.rotated(Vector3.UP, cam_twist.rotation.y)
 	
 	current_recoil = lerp(current_recoil, target_recoil, 0.95) #hard code i know
-	target_recoil = lerp(target_recoil, Vector2.ZERO, cur_weapon.recoil_smoothing * delta)
+	target_recoil = lerp(target_recoil, Vector2.ZERO, cur_weapon.resource.recoil_smoothing * delta)
 	cam_twist.rotation.y += current_recoil.x * delta
 	cam_pitch.rotation.x += current_recoil.y * delta
 	
@@ -129,7 +135,7 @@ func ray_cast_pos() -> void:
 	var shoot_direction = (shoot_ray_end - shoot_ray_pos).normalized()
 
 	# Generate random spray
-	var spray_amount: float = cur_weapon.spray_degree_by_bullet.sample(spray_index)*cur_weapon.spray_degree
+	var spray_amount: float = cur_weapon.resource.spray_degree_by_bullet.sample(spray_index)*cur_weapon.resource.spray_degree
 	var spray_x = deg_to_rad(randf_range(-spray_amount, spray_amount))
 	var spray_y = deg_to_rad(randf_range(-spray_amount, spray_amount))
 
@@ -159,7 +165,7 @@ func ray_cast_damage():
 		return
 	else:
 		if hit_object is Shootable:
-			hit_object.on_hit(cur_weapon.base_damage, hit_pos)
+			hit_object.on_hit(cur_weapon.resource.base_damage, hit_pos)
 		return
 	# put this in the future BulletHitscan Class
 
@@ -171,36 +177,36 @@ func shoot() -> void:
 		
 		cur_weapon.cur_mag_size -= 1
 		#camera code
-		target_recoil = (cur_weapon.reocoil + Vector2((randf()*2-1) * cur_weapon.recoil_variance.x, (randf()*2-1) * cur_weapon.recoil_variance.y))/10
-		spray_index += 1/cur_weapon.base_mag_size
+		target_recoil = (cur_weapon.resource.recoil + Vector2((randf()*2-1) * cur_weapon.resource.recoil_variance.x, (randf()*2-1) * cur_weapon.resource.recoil_variance.y))/10
+		spray_index += 1/cur_weapon.resource.base_mag_size
 		
-		if cur_weapon.is_projectile:
-			cur_weapon.shoot_projectile(
+		if cur_weapon.resource.is_projectile:
+			cur_weapon.load_projectile(
 				shoot_ray_pos, hit_dir, 
-				cur_weapon.base_damage, 
-				cur_weapon.bullet_projectile_base_speed
+				cur_weapon.resource.base_damage, 
+				cur_weapon.resource.bullet_projectile_base_speed
 			)
 		else:
 			ray_cast_damage()
 
 func reload() -> void:
-	cur_weapon.cur_mag_size = cur_weapon.base_mag_size
+	cur_weapon.cur_mag_size = int(cur_weapon.resource.base_mag_size)
 	spray_index = 0
 
 func change_weapon(index: int = 1) -> void:
 	if weapon_index + index >= weapons.size():
 		weapon_index = 0
 		cur_weapon = weapons[weapon_index]
-		print(cur_weapon.name)
+		print(cur_weapon.resource.name)
 		return
 		
 	if weapon_index + index <= -1:
 		weapon_index = weapons.size()-1
 		cur_weapon = weapons[weapon_index]
-		print(cur_weapon.name)
+		print(cur_weapon.resource.name)
 		return
 	
 	weapon_index += index
 	cur_weapon = weapons[weapon_index]
-	print(cur_weapon.name)
+	print(cur_weapon.resource.name)
 	return
