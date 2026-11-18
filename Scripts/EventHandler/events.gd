@@ -1,5 +1,5 @@
 class_name Event
-enum {
+enum Type {
 	PLAYER_SHOOT,
 	PLAYER_START_RELOAD,
 	PLAYER_END_RELOAD

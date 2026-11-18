@@ -10,7 +10,7 @@ func start():
 	burst_fired = 1
 	timer_reset()
 	
-	EventHandler.call_event(Event.PLAYER_SHOOT)
+	EventHandler.call_event(Event.Type.PLAYER_SHOOT)
 	weaponc.shoot()
 
 func process_physics(delta: float) -> void:
@@ -19,7 +19,7 @@ func process_physics(delta: float) -> void:
 			burst_fired += 1
 			timer_reset()
 			
-			EventHandler.call_event(Event.PLAYER_SHOOT)
+			EventHandler.call_event(Event.Type.PLAYER_SHOOT)
 			weaponc.shoot()
 	else:
 		if timer >= weaponc.cur_weapon.resource.base_fire_rate:

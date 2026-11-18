@@ -5,9 +5,12 @@ var resource: WeaponResource
 
 func _init(weapon_resource: WeaponResource = preload("uid://xenwrkxc7ylc")) -> void:
 	resource = weapon_resource
+	#EventHandler.connect_event(self, Event.PLAYER_SHOOT)
 
 var cur_mag_size: int = 0
 var modifers: Array[Modifer] = []
+
+
 
 func load_projectile(from: Vector3, direction: Vector3, damage: float, speed: float) -> void:
 	var bullet_instance : BulletProjectile = resource.bullet_projectile.instantiate()

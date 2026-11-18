@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ModiferResource" format=3 uid="uid://fi2q1kq8kien"]
+
+[ext_resource type="Script" uid="uid://dhja4rvip65yt" path="res://Modifiers/modifer_resource.gd" id="1_re3s8"]
+[ext_resource type="Script" uid="uid://c4srh46be677u" path="res://Modifiers/Joker/joker_mod.gd" id="1_tgq4j"]
+
+[resource]
+script = ExtResource("1_re3s8")
+event_connectors = Array[int]([0])
+mod_behaviour = ExtResource("1_tgq4j")
+metadata/_custom_type_script = "uid://dhja4rvip65yt"
