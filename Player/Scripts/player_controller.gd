@@ -1,9 +1,10 @@
 extends CharacterBody3D
 class_name Player
 
-#state machines
+#state machines + other
 @onready var movement_state_machine: StateMachine = $MovementStateMachine
 @onready var weapon_controller: WeaponController = $WeaponController
+@onready var ui: PlayerUI = $PlayerUI
 
 #camera
 @onready var cam_twist := weapon_controller.cam_twist
@@ -18,7 +19,7 @@ var hor_velocity: Vector3 = Vector3.ZERO
 var speed: float = 0.0
 var target_speed: float = 0.0
 
-#gun
+#gun ???
 
 #param
 @export_category("Movement")

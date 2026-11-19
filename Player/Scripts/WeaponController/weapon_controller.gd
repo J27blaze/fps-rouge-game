@@ -1,7 +1,8 @@
 extends Node3D
 class_name WeaponController
 
-@onready var player : Player = get_parent()
+@export var player : Player
+@export var player_ui : PlayerUI
 @onready var weapon_state_machine : StateMachine = $WeaponStateMachine
 
 # camera movement stuff
