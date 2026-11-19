@@ -201,16 +201,16 @@ func change_weapon(index: int = 1) -> void:
 	if weapon_index + index >= weapons.size():
 		weapon_index = 0
 		cur_weapon = weapons[weapon_index]
-		print(cur_weapon.resource.name)
+		#print(cur_weapon.resource.name)
 		return
 		
 	if weapon_index + index <= -1:
 		weapon_index = weapons.size()-1
 		cur_weapon = weapons[weapon_index]
-		print(cur_weapon.resource.name)
+		#print(cur_weapon.resource.name)
 		return
 	
 	weapon_index += index
 	cur_weapon = weapons[weapon_index]
-	print(cur_weapon.resource.name)
+	#print(cur_weapon.resource.name)
 	return

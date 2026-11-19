@@ -27,6 +27,15 @@ func _process(delta: float) -> void:
 			index += 1
 func swap_anim() -> void:
 	weapon_anim.play("swap")
+func change_weapon_resource() -> void:
+	var temp1: WeaponUI = weapon_uis[0] # hard code
+	var temp2: WeaponUI = weapon_uis[1] 
+	
+	weapon_uis[0] = temp2
+	weapon_uis[1] = temp1
+	
+	weapon_uis[0].load_resource()
+	weapon_uis[1].load_resource()
 	
 func load_weapon_uis() -> void:
 	weapon_uis.clear()
@@ -35,9 +44,15 @@ func load_weapon_uis() -> void:
 	for weapon in weaponc.weapons:
 		var instance: WeaponUI = weapon_ui.instantiate()
 		
+		instance.position = Vector2.ZERO
+		instance.player_ui = self
+		instance.weapon = weapon
+		
+		instance.load_resource()
+		
 		weapon_uis.append(instance)
 		
 		left_bottom.add_child(instance)
-		instance.position = Vector2.ZERO
+		print(weapon.resource.name)
 		
 		index += 1
