@@ -6,7 +6,7 @@ var weapon: Weapon
 @export var modifer_ui: PackedScene
 
 @export var initial_mod_pos: Vector2 = Vector2.ZERO
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@export var anim_player: AnimationPlayer
 
 func load_resource() -> void:
 	texture = weapon.resource.ui_asset

@@ -58,7 +58,7 @@ _data = {
 &"fade_out": SubResource("Animation_oehbt")
 }
 
-[node name="WeaponUI" type="TextureRect" unique_id=457663960]
+[node name="WeaponUI" type="TextureRect" unique_id=457663960 node_paths=PackedStringArray("anim_player")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -72,10 +72,12 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(-160, -555)
+mouse_filter = 2
 texture = ExtResource("1_us6rq")
 script = ExtResource("2_l4goj")
 modifer_ui = ExtResource("3_sx8bn")
 initial_mod_pos = Vector2(84, 850)
+anim_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1979347721]
 libraries/ = SubResource("AnimationLibrary_3hmsb")

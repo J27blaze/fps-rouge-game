@@ -18,6 +18,7 @@ var weapon_uis: Array[WeaponUI]
 
 func _ready() -> void:
 	load_weapon_uis()
+	weapon_uis[1].anim_player.play("fade_out")
 
 func _process(delta: float) -> void:
 	if weapon_uis.size() > 0:
@@ -28,6 +29,8 @@ func _process(delta: float) -> void:
 			index += 1
 func swap_anim() -> void:
 	weapon_anim.play("swap")
+	weapon_uis[1].anim_player.play("fade_in")
+	weapon_uis[0].anim_player.play("fade_out")
 func change_weapon_resource() -> void:
 	var temp1: WeaponUI = weapon_uis[0] # hard code
 	var temp2: WeaponUI = weapon_uis[1] 

@@ -4,7 +4,7 @@ class_name Player
 #state machines + other
 @onready var movement_state_machine: StateMachine = $MovementStateMachine
 @onready var weapon_controller: WeaponController = $WeaponController
-@onready var ui: PlayerUI = $PlayerUI
+@export var ui: PlayerUI
 
 #camera
 @onready var cam_twist := weapon_controller.cam_twist

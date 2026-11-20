@@ -16,13 +16,13 @@ func load_resource() -> void:
 	texture = $TextureRect
 	texture.texture = resource.ui_asset
 
-func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
-	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-	print("Clicked inside Area2D!")
-
 func _process(delta: float) -> void:
 	if !resource:
 		return
 	else:
+		#calc_is_mouse_hover()
 		if is_mouse_hover && Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			print(resource.name)
+
+func _on_texture_rect_mouse_entered() -> void:
+	print("dd")

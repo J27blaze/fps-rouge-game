@@ -4,23 +4,34 @@
 [ext_resource type="Texture2D" uid="uid://cridmdwh6ftxq" path="res://UI/PlayerUI/WeaponUI/temp_modifer.png" id="2_x87if"]
 
 [node name="modifier_ui" type="Control" unique_id=937368474]
+custom_maximum_size = Vector2(86, 86)
 layout_mode = 3
 anchors_preset = 0
+offset_left = -43.0
+offset_top = -43.0
+offset_right = 43.0
+offset_bottom = 43.0
+offset_transform_enabled = true
+mouse_filter = 2
 script = ExtResource("1_lb7pn")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1777417888]
+z_as_relative = false
+custom_maximum_size = Vector2(86, 86)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 86.0
-offset_bottom = 86.0
+offset_left = -43.0
+offset_top = -43.0
+offset_right = 43.0
+offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
 offset_transform_position = Vector2(-43, -43)
+mouse_filter = 0
 texture = ExtResource("2_x87if")
 
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
