@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://ctppkv23jjfyc"]
 
-[ext_resource type="Texture2D" uid="uid://dxiwja1cl1t4s" path="res://UI/PlayerUI/WeaponUI/temp_weapon_ui.png" id="1_us6rq"]
 [ext_resource type="Script" uid="uid://cj2s8s5tp2pd5" path="res://UI/PlayerUI/WeaponUI/weapon_ui.gd" id="2_l4goj"]
 [ext_resource type="PackedScene" uid="uid://bu5o3hvvve67m" path="res://UI/PlayerUI/WeaponUI/modifier_ui.tscn" id="3_sx8bn"]
 
@@ -58,7 +57,8 @@ _data = {
 &"fade_out": SubResource("Animation_oehbt")
 }
 
-[node name="WeaponUI" type="TextureRect" unique_id=457663960 node_paths=PackedStringArray("anim_player")]
+[node name="WeaponUI" type="Control" unique_id=1082364180 node_paths=PackedStringArray("anim_player", "texture")]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -70,15 +70,21 @@ offset_right = -640.0
 offset_bottom = 570.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
 offset_transform_position = Vector2(-160, -555)
 mouse_filter = 2
-texture = ExtResource("1_us6rq")
 script = ExtResource("2_l4goj")
 modifer_ui = ExtResource("3_sx8bn")
 initial_mod_pos = Vector2(84, 850)
 anim_player = NodePath("AnimationPlayer")
+texture = NodePath("TextureRect")
+pos_offset = Vector2(-171, -512)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1979347721]
 libraries/ = SubResource("AnimationLibrary_3hmsb")
 autoplay = &"fade_in"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=344353871]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

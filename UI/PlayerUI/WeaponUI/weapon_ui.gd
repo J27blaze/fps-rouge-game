@@ -1,4 +1,4 @@
-extends TextureRect
+extends Control
 class_name WeaponUI
 
 var player_ui: PlayerUI
@@ -7,9 +7,12 @@ var weapon: Weapon
 
 @export var initial_mod_pos: Vector2 = Vector2.ZERO
 @export var anim_player: AnimationPlayer
+@export var texture: TextureRect
+
+@export var pos_offset: Vector2
 
 func load_resource() -> void:
-	texture = weapon.resource.ui_asset
+	texture.texture = weapon.resource.ui_asset
 	#do the modifer code in here
 
 func load_modifers() -> void:

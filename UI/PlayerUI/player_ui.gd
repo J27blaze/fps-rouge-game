@@ -24,8 +24,8 @@ func _process(delta: float) -> void:
 	if weapon_uis.size() > 0:
 		var index: int = 0
 		for weapon in weapon_uis:
-			if index == 0: weapon.position = pos_cur.position
-			elif index == 1: weapon.position = pos_second.position
+			if index == 0: weapon.position = pos_cur.position + weapon.pos_offset
+			elif index == 1: weapon.position = pos_second.position + weapon.pos_offset
 			index += 1
 func swap_anim() -> void:
 	weapon_anim.play("swap")
