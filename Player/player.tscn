@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://jws5ur8x7gel" path="res://Player/Scripts/WeaponController/Weapon_States/change_weapon_state.gd" id="13_gu6f8"]
 [ext_resource type="Texture2D" uid="uid://c41bsbl66lw06" path="res://icon.svg" id="14_dkpta"]
 [ext_resource type="Texture2D" uid="uid://c5l1b0m7ybm6e" path="res://UI/PlayerUI/temp_crosshair.png" id="14_gu6f8"]
+[ext_resource type="Theme" uid="uid://c20kqyrrntcre" path="res://UI/Fonts/zen_dots_font_theme.tres" id="15_dkpta"]
 
 [sub_resource type="Curve" id="Curve_k53q1"]
 _limits = [-1.0, 1.0, -1.0, 1.0]
@@ -234,7 +235,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6218665, 0.94328165, 3.9917
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_ry41o")
 
-[node name="PlayerUI" type="Control" parent="." unique_id=2104709907 node_paths=PackedStringArray("player", "weaponc")]
+[node name="PlayerUI" type="Control" parent="." unique_id=2104709907 node_paths=PackedStringArray("player", "weaponc", "reload")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -243,6 +244,7 @@ script = ExtResource("11_gu6f8")
 player = NodePath("..")
 weaponc = NodePath("../WeaponController")
 weapon_ui = ExtResource("12_p5o4e")
+reload = NodePath("left_bottom/reload_text")
 metadata/_edit_lock_ = true
 
 [node name="Weapon_anim" type="AnimationPlayer" parent="PlayerUI" unique_id=779527816]
@@ -296,3 +298,16 @@ offset_bottom = -448.0
 modulate = Color(0, 0, 1, 0.13725491)
 position = Vector2(2, -2)
 texture = ExtResource("14_dkpta")
+
+[node name="reload_text" type="RichTextLabel" parent="PlayerUI/left_bottom" unique_id=377334205]
+layout_mode = 0
+offset_left = 424.0
+offset_top = -97.0
+offset_right = 688.0
+offset_bottom = -17.0
+theme = ExtResource("15_dkpta")
+theme_override_constants/outline_size = 21
+theme_override_font_sizes/normal_font_size = 44
+text = "12/12"
+horizontal_alignment = 1
+vertical_alignment = 1

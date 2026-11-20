@@ -23,6 +23,7 @@ func on_hit(damage: float, hit_position: Vector3):
 func process_physics(delta: float) -> void:
 	move_and_slide()
 	if health <= 0:
+		EventHandler.call_event(Event.Type.ENEMY_DIED)
 		queue_free()
 		return
 	

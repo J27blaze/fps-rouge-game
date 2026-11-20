@@ -192,15 +192,18 @@ func shoot() -> void:
 			)
 		else:
 			ray_cast_damage()
+		player_ui.update_reload_text()
 
 func reload() -> void:
 	cur_weapon.cur_mag_size = int(cur_weapon.resource.base_mag_size)
 	spray_index = 0
+	player_ui.update_reload_text()
 
 func change_weapon(index: int = 1) -> void:
 	if weapon_index + index >= weapons.size():
 		weapon_index = 0
 		cur_weapon = weapons[weapon_index]
+		player_ui.update_reload_text()
 		#print(cur_weapon.resource.name)
 		return
 		
@@ -208,9 +211,11 @@ func change_weapon(index: int = 1) -> void:
 		weapon_index = weapons.size()-1
 		cur_weapon = weapons[weapon_index]
 		#print(cur_weapon.resource.name)
+		player_ui.update_reload_text()
 		return
 	
 	weapon_index += index
 	cur_weapon = weapons[weapon_index]
 	#print(cur_weapon.resource.name)
+	player_ui.update_reload_text()
 	return

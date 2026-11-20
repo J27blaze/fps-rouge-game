@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_re3s8")
-name = "Joker"
+name = "Jimbo"
 event_connectors = Array[int]([0])
 mod_behaviour = ExtResource("1_tgq4j")
 metadata/_custom_type_script = "uid://dhja4rvip65yt"

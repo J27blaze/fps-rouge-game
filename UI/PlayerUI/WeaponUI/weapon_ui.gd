@@ -5,11 +5,14 @@ var player_ui: PlayerUI
 var weapon: Weapon
 @export var modifer_ui: PackedScene
 
-@onready var initial_mod_pos: Vector2 = $initial_mod_pos.position
+@export var initial_mod_pos: Vector2 = Vector2.ZERO
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 func load_resource() -> void:
 	texture = weapon.resource.ui_asset
 	#do the modifer code in here
+
+func load_modifers() -> void:
 	for modifer in weapon.modifers:
 		if !modifer:
 			return

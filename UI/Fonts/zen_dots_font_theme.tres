@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://c20kqyrrntcre"]
+
+[ext_resource type="FontFile" uid="uid://bn0s2gdg6ojvd" path="res://UI/Fonts/ZenDots-Regular.ttf" id="1_0g6og"]
+
+[resource]
+default_font = ExtResource("1_0g6og")
+default_font_size = 24

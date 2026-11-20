@@ -12,6 +12,7 @@ class_name PlayerUI
 
 @onready var pos_cur : Control = $left_bottom/Pos_cur
 @onready var pos_second : Control = $left_bottom/Pos_second
+@export var reload: RichTextLabel
 
 var weapon_uis: Array[WeaponUI]
 
@@ -34,6 +35,10 @@ func change_weapon_resource() -> void:
 	weapon_uis[0] = temp2
 	weapon_uis[1] = temp1
 	
+	weapon_uis[0].z_index = 0
+	weapon_uis[1].z_index = -1
+	
+	#update_reload_text()
 	#weapon_uis[0].load_resource()
 #	weapon_uis[1].load_resource()
 	
@@ -49,6 +54,9 @@ func load_weapon_uis() -> void:
 		instance.weapon = weapon
 		
 		instance.load_resource()
+		instance.load_modifers()
+		
+		instance.z_index = -index
 		
 		weapon_uis.append(instance)
 		
@@ -56,3 +64,7 @@ func load_weapon_uis() -> void:
 		print(weapon.resource.name)
 		
 		index += 1
+	#update_reload_text()
+
+func update_reload_text() -> void:
+	reload.text = str(int(weaponc.cur_weapon.cur_mag_size)) + "/" + str(int(weaponc.cur_weapon.resource.base_mag_size))
