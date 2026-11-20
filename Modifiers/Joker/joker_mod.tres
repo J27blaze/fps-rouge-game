@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dhja4rvip65yt" path="res://Modifiers/modifer_resource.gd" id="1_re3s8"]
 [ext_resource type="Script" uid="uid://c4srh46be677u" path="res://Modifiers/Joker/joker_mod.gd" id="1_tgq4j"]
+[ext_resource type="Texture2D" uid="uid://ds1hskliq2suj" path="res://Modifiers/Joker/joker_ui.png" id="3_iyoil"]
 
 [resource]
 script = ExtResource("1_re3s8")
+name = "Joker"
 event_connectors = Array[int]([0])
 mod_behaviour = ExtResource("1_tgq4j")
 metadata/_custom_type_script = "uid://dhja4rvip65yt"

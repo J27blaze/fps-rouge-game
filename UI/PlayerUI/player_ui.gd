@@ -34,8 +34,8 @@ func change_weapon_resource() -> void:
 	weapon_uis[0] = temp2
 	weapon_uis[1] = temp1
 	
-	weapon_uis[0].load_resource()
-	weapon_uis[1].load_resource()
+	#weapon_uis[0].load_resource()
+#	weapon_uis[1].load_resource()
 	
 func load_weapon_uis() -> void:
 	weapon_uis.clear()

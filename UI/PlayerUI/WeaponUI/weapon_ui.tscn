@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxiwja1cl1t4s" path="res://UI/PlayerUI/WeaponUI/temp_weapon_ui.png" id="1_us6rq"]
 [ext_resource type="Script" uid="uid://cj2s8s5tp2pd5" path="res://UI/PlayerUI/WeaponUI/weapon_ui.gd" id="2_l4goj"]
+[ext_resource type="PackedScene" uid="uid://bu5o3hvvve67m" path="res://UI/PlayerUI/WeaponUI/modifier_ui.tscn" id="3_sx8bn"]
 
 [node name="WeaponUI" type="TextureRect" unique_id=457663960]
 anchors_preset = 8
@@ -20,3 +21,12 @@ offset_transform_enabled = true
 offset_transform_position = Vector2(-555, -160)
 texture = ExtResource("1_us6rq")
 script = ExtResource("2_l4goj")
+modifer_ui = ExtResource("3_sx8bn")
+
+[node name="initial_mod_pos" type="Control" parent="." unique_id=216553263]
+anchors_preset = 0
+offset_left = 173.0
+offset_top = 157.0
+offset_right = 213.0
+offset_bottom = 197.0
+rotation = 1.5707964
