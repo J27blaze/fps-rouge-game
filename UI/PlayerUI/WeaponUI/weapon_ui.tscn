@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cj2s8s5tp2pd5" path="res://UI/PlayerUI/WeaponUI/weapon_ui.gd" id="2_l4goj"]
 [ext_resource type="PackedScene" uid="uid://bu5o3hvvve67m" path="res://UI/PlayerUI/WeaponUI/modifier_ui.tscn" id="3_sx8bn"]
+[ext_resource type="Texture2D" uid="uid://dxiwja1cl1t4s" path="res://UI/PlayerUI/WeaponUI/temp_weapon_ui.png" id="3_w15k3"]
 
 [sub_resource type="Animation" id="Animation_sx8bn"]
 length = 0.001
@@ -31,7 +32,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.2, 0.2, 0.2, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.5124433, 0.5124433, 0.5124433, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_oehbt"]
@@ -47,7 +48,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.2, 0.2, 0.2, 1)]
+"values": [Color(1, 1, 1, 1), Color(0.5137255, 0.5137255, 0.5137255, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3hmsb"]
@@ -88,3 +89,4 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+texture = ExtResource("3_w15k3")
