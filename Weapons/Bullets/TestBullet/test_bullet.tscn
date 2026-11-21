@@ -11,6 +11,7 @@ rings = 6
 [node name="test_bullet" type="Node3D" unique_id=465095552]
 physics_interpolation_mode = 2
 script = ExtResource("1_0vmv5")
+bullet_size = 0.45
 physics_custom_inter = 2
 
 [node name="model" type="Node3D" parent="." unique_id=1836453137]

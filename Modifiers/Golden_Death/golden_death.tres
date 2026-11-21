@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ModiferResource" format=3 uid="uid://bejpdn2ysbasp"]
+
+[ext_resource type="Script" uid="uid://dhja4rvip65yt" path="res://Modifiers/modifer_resource.gd" id="1_cea7m"]
+[ext_resource type="Script" uid="uid://cvhmclmgml501" path="res://Modifiers/Golden_Death/golden_death.gd" id="1_vgoqe"]
+[ext_resource type="Texture2D" uid="uid://cvrjuwjjdgldd" path="res://Modifiers/Golden_Death/golden_death.png" id="3_vgoqe"]
+
+[resource]
+script = ExtResource("1_cea7m")
+name = "Golden Death"
+hover_text = "On killing an enemy, desc..."
+event_connectors = Array[int]([4])
+mod_behaviour = ExtResource("1_vgoqe")
+ui_asset = ExtResource("3_vgoqe")
+metadata/_custom_type_script = "uid://dhja4rvip65yt"

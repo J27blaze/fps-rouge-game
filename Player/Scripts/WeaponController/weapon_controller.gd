@@ -52,6 +52,7 @@ func _ready() -> void:
 	reload()
 	change_weapon(1)
 	cur_weapon.load_resource()
+	cur_weapon.add_modifer()
 	reload()
 	change_weapon(-1)
 	cur_weapon.load_resource()
@@ -200,6 +201,7 @@ func reload() -> void:
 	player_ui.update_reload_text()
 
 func change_weapon(index: int = 1) -> void:
+	cur_weapon.set_modifers_listening(false)
 	if weapon_index + index >= weapons.size():
 		weapon_index = 0
 		cur_weapon = weapons[weapon_index]
@@ -216,6 +218,8 @@ func change_weapon(index: int = 1) -> void:
 	
 	weapon_index += index
 	cur_weapon = weapons[weapon_index]
+	
+	cur_weapon.set_modifers_listening(true)
 	#print(cur_weapon.resource.name)
 	player_ui.update_reload_text()
 	return

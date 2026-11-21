@@ -8,14 +8,20 @@ func _init(weapon_resource: WeaponResource = preload("uid://xenwrkxc7ylc")) -> v
 	resource = weapon_resource
 	
 	modifers.resize(6)
-	modifers[0] = Modifer.new()
-	modifers[0].connect_events()
-	#modifers[1] = Modifer.new()
-	#EventHandler.connect_event(self, Event.PLAYER_SHOOT)
-
+	
 func load_resource() -> void:
 	cur_mag_size = resource.base_mag_size
 	damage = resource.base_damage
+
+func add_modifer() -> void:
+	modifers[0] = Modifer.new()
+	
+	modifers[1] = Modifer.new(preload("uid://bejpdn2ysbasp"))
+
+func set_modifers_listening(listening: bool) -> void:
+	for mod in modifers:
+		if mod:
+			mod.active = listening
 
 #everythign bro 
 var cur_mag_size: int = 0
@@ -25,6 +31,7 @@ func calc_damage() -> float: #hard code modifer behaviour
 	for modifer in modifers:
 		if modifer:
 			damage += modifer.mod_behaviour.damage_flat_increase
+			#print(modifer.resource.name)
 			damage *= clampf(modifer.mod_behaviour.damage_x_increase, 0, INF)
 	return damage
 

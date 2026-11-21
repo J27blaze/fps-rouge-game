@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_re3s8")
 name = "Jimbo"
-event_connectors = Array[int]([0])
+hover_text = "Base damage increased by +4 pre bullet"
+event_connectors = Array[int]([1])
 mod_behaviour = ExtResource("1_tgq4j")
 metadata/_custom_type_script = "uid://dhja4rvip65yt"

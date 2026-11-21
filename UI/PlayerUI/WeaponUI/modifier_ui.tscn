@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3aal6v5gvvo4" path="res://UI/PlayerUI/WeaponUI/modifier_ui.gd" id="1_lb7pn"]
 [ext_resource type="Texture2D" uid="uid://cridmdwh6ftxq" path="res://UI/PlayerUI/WeaponUI/temp_modifer.png" id="2_x87if"]
+[ext_resource type="Theme" uid="uid://c20kqyrrntcre" path="res://UI/Fonts/zen_dots_font_theme.tres" id="3_2y2ok"]
 
 [node name="modifier_ui" type="Control" unique_id=937368474]
 custom_maximum_size = Vector2(86, 86)
@@ -16,7 +17,6 @@ mouse_filter = 2
 script = ExtResource("1_lb7pn")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1777417888]
-z_as_relative = false
 custom_maximum_size = Vector2(86, 86)
 layout_mode = 1
 anchors_preset = 8
@@ -34,4 +34,35 @@ offset_transform_position = Vector2(-43, -43)
 mouse_filter = 0
 texture = ExtResource("2_x87if")
 
+[node name="hover_text" type="Control" parent="." unique_id=1170077036]
+anchors_preset = 0
+offset_left = 93.0
+offset_top = -85.0
+offset_right = 348.99994
+offset_bottom = 171.0
+
+[node name="ColorRect" type="ColorRect" parent="hover_text" unique_id=1674068944]
+z_index = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.41568628)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="hover_text" unique_id=1407616352]
+z_index = 5
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+theme = ExtResource("3_2y2ok")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 20
+text = "Test text"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect" to="." method="_on_texture_rect_mouse_exited"]

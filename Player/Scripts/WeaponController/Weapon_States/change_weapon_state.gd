@@ -12,5 +12,6 @@ func start() -> void:
 func process_frame(delta: float) -> void:
 	if timer > change_speed:
 		weaponc.change_weapon()
+		EventHandler.call_event(Event.Type.PLAYER_SWAP_WEAPON)
 		change_state("nonshoot")
 		return

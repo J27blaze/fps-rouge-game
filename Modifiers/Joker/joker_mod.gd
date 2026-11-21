@@ -1,5 +1,7 @@
 extends ModiferBehaviour
 
-func on_receive_event(event: Event.Type) -> void:
+func _init() -> void:
 	damage_flat_increase = 4
-	#print("ewrfer")
+
+func on_receive_event(event: Event.Type) -> void:
+	pass
