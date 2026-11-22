@@ -22,7 +22,7 @@ func process_phy(pos: Vector3, rot: Vector3 = Vector3.ZERO):
 	prev_pos = cur_pos
 	cur_pos = pos
 	
-	cur_rot = prev_rot
+	prev_rot = cur_rot
 	cur_rot = rot
 
 func process_frame():

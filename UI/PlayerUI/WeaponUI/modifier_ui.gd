@@ -26,11 +26,8 @@ func _process(delta: float) -> void:
 		#calc_is_mouse_hover()
 		hover_ui.visible = is_mouse_hover
 		if is_mouse_hover && Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			if Input.is_action_pressed("ui_click"):
+			if Input.is_action_just_pressed("ui_click"):
 				get_parent().drag_mod_ui(self)
-			else:
-				get_parent().recalc_mod_ui()
-			pass
 
 func _on_texture_rect_mouse_entered() -> void:
 	if modifier.active:

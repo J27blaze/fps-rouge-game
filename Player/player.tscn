@@ -35,6 +35,10 @@ point_count = 4
 radial_segments = 12
 rings = 2
 
+[sub_resource type="SphereMesh" id="SphereMesh_ry41o"]
+radial_segments = 4
+rings = 1
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ry41o"]
 
 [sub_resource type="Animation" id="Animation_lfmf2"]
@@ -215,10 +219,15 @@ script = ExtResource("13_gu6f8")
 change_speed = 0.32
 
 [node name="ModelTwist" type="Node3D" parent="WeaponController" unique_id=323293110]
+top_level = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WeaponController/ModelTwist" unique_id=1643996000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_ry41o")
+
+[node name="gun" type="MeshInstance3D" parent="WeaponController/ModelTwist" unique_id=1595846418]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+mesh = SubResource("SphereMesh_ry41o")
 
 [node name="camera_twist" type="Node3D" parent="WeaponController" unique_id=1521490860]
 physics_interpolation_mode = 2
@@ -270,7 +279,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="cross_hair" type="Sprite2D" parent="PlayerUI/PlayerUI/centre" unique_id=1716097508]
-modulate = Color(0.7490196, 1, 0, 1)
 scale = Vector2(0.325, 0.325)
 texture = ExtResource("14_gu6f8")
 

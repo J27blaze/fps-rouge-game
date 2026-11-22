@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://xenwrkxc7ylc"]
 
 [ext_resource type="Script" uid="uid://m1mbfmxom8xa" path="res://Weapons/weapon_resource.gd" id="1_4ggke"]
-[ext_resource type="PackedScene" uid="uid://bpp5b7fijbti2" path="res://Weapons/TestWeapon/test_weapon.tscn" id="1_k0wbl"]
 [ext_resource type="Texture2D" uid="uid://c0khgyesgxwrq" path="res://Weapons/TestWeapon/test_weapon_ui_asset.png" id="3_xyicw"]
 
 [sub_resource type="Curve" id="Curve_bt3tb"]

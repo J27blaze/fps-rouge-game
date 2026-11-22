@@ -1,6 +1,10 @@
 extends CharacterBody3D
 class_name Player
 
+@onready var model_twist := $WeaponController/ModelTwist
+var model_twist_inter: Physics_Interolate = Physics_Interolate.new()
+var model_twist_lerp_rot : float = 0.0
+
 #state machines + other
 @onready var movement_state_machine: StateMachine = $MovementStateMachine
 @onready var weapon_controller: WeaponController = $WeaponController
@@ -15,6 +19,7 @@ var mouse_dir: Vector2
 #movement
 var input_dir: Vector2 = Vector2.ZERO
 var direction: Vector3 = Vector3.ZERO
+var last_dir: Vector3 = Vector3.ZERO
 var hor_velocity: Vector3 = Vector3.ZERO
 var speed: float = 0.0
 var target_speed: float = 0.0
@@ -45,6 +50,8 @@ func _init() -> void:
 func _ready():
 	movement_state_machine.init()
 	
+	model_twist_inter.init(position, Vector3(0, cam_twist.rotation.y, 0) )
+	
 func _input(event: InputEvent) -> void:
 	movement_state_machine.process_input(event)
 
@@ -55,6 +62,11 @@ func _process(delta: float) -> void:
 	DebugDraw3D.draw_line(position, position + hor_velocity, Color.YELLOW)
 	
 	movement_state_machine.process_frame(delta)
+	
+	model_twist_inter.process_frame()
+	
+	model_twist.global_position = model_twist_inter.inter_pos
+	model_twist.rotation.y =  model_twist_inter.inter_rot.y
 
 func _physics_process(delta: float) -> void:
 	movement_state_machine.process_physics(delta)
@@ -63,7 +75,11 @@ func _physics_process(delta: float) -> void:
 	
 	hor_velocity = Vector3(velocity.x, 0, velocity.z)
 	speed = hor_velocity.length()
-
+	
+	if direction.length() > 0.1:
+		last_dir = direction
+	model_twist_inter.process_phy(position, Vector3(0, cam_twist.rotation.y, 0) )
+	
 	DebugDraw2D.set_text("Speed", snapped(speed, 0.01))
 	DebugDraw2D.set_text("Target_Speed", snapped(target_speed, 0.01))
 	

@@ -6,6 +6,8 @@ var weapon: Weapon
 @export var modifer_ui: PackedScene
 var modifer_uis: Array[ModiferUI]
 
+var selected_modifer_ui: ModiferUI
+
 @export var initial_mod_pos: Vector2 = Vector2.ZERO
 @export var mod_pos_offset: Vector2 = Vector2.ZERO
 @export var anim_player: AnimationPlayer
@@ -38,11 +40,28 @@ func load_modifers() -> void:
 			modifer_uis.append(instance)
 			index += 1
 
+var tar_ui_selected_pos: Vector2
+func _process(delta: float) -> void:
+	if !selected_modifer_ui:
+		return
+	else:
+		tar_ui_selected_pos = get_viewport().get_mouse_position() + Vector2.ONE*-43
+		selected_modifer_ui.global_position = lerp(selected_modifer_ui.global_position, tar_ui_selected_pos, 0.4)
+		if Input.is_action_just_released("ui_click"):
+			recalc_mod_ui()
+
 func drag_mod_ui(mod_ui: ModiferUI) -> void:
-	mod_ui.global_position = get_viewport().get_mouse_position() + Vector2.ONE*-43
+	selected_modifer_ui = mod_ui
+	tar_ui_selected_pos = selected_modifer_ui.global_position
+	
 func recalc_mod_ui() -> void:
+	modifer_uis.sort_custom(func(a, b): return a.position.y > b.position.y)
+	var index: int = 0
+	
 	for modifer in modifer_uis:
 		if !modifer:
 			return
 		else:
-			pass
+			modifer.position = initial_mod_pos + index*(mod_pos_offset)
+			index += 1
+	selected_modifer_ui = null
