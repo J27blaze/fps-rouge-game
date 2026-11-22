@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 	model_twist_inter.process_frame()
 	
 	model_twist.global_position = model_twist_inter.inter_pos
-	model_twist.rotation.y =  model_twist_inter.inter_rot.y
+	model_twist.rotation.y = cam_twist.rotation.y
 
 func _physics_process(delta: float) -> void:
 	movement_state_machine.process_physics(delta)

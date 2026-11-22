@@ -3,7 +3,20 @@ var camera_controller_sensitivity = 0.07
 var camera_mouse_sensitivity = 0.001
 
 var buffered_inputs: Dictionary[String, float]
-
+var debug_draw: bool = true
+func _ready() -> void:
+	debug_draw_set()
+func debug_draw_set():
+	debug_draw = !debug_draw
+	DebugDraw3D.set_debug_enabled(debug_draw)
+	get_tree().debug_collisions_hint = debug_draw
+	
+	#get_tree().debug_collisions_hint = not get_tree().debug_collisions_hint
+	for node in get_tree().get_root().find_children("*", "CollisionShape3D", true, false):
+		var parent = node.get_parent()
+		if parent:
+			parent.remove_child(node)
+			parent.add_child(node)
 func _process(delta: float) -> void:
 	#print(buffered_inputs)
 	if !buffered_inputs.is_empty():
@@ -12,7 +25,6 @@ func _process(delta: float) -> void:
 			if buffered_inputs[input] > 0:
 				buffered_inputs[input] -= delta*60
 
-var debug_draw: bool = true
 func _input(event: InputEvent) -> void:
 	#if InputEvent is InputEventAction:
 	
@@ -38,9 +50,7 @@ func _input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	if Input.is_action_just_pressed("ui_focus_next") && event.is_action("ui_focus_next"):
-		debug_draw = !debug_draw
-		DebugDraw3D.set_debug_enabled(debug_draw)
-		get_tree().debug_collisions_hint = not get_tree().debug_collisions_hint
+		debug_draw_set()
 	pass
 
 #function can only work in process or proccess_physics, and not process_input

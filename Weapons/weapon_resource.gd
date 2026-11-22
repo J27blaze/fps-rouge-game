@@ -3,7 +3,7 @@ extends Resource
 class_name WeaponResource
 
 @export var name: String = "test_weapon"
-@export var model_scene: Mesh
+@export var model: PackedScene
 @export var ui_asset: Texture2D
 @export var base_max_modifer_amount: int = 6
 

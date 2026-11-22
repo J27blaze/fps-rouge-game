@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_cea7m")
 name = "Golden Death"
-hover_text = "On killing an enemy, desc..."
+hover_text = "On killing an enemy, 1 / 2 chance to gain +$4"
 event_connectors = Array[int]([4])
 mod_behaviour = ExtResource("1_vgoqe")
 ui_asset = ExtResource("3_vgoqe")

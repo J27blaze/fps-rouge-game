@@ -10,6 +10,8 @@ class_name WeaponController
 @onready var cam_pitch := $camera_twist/camera_pitch
 @onready var cam_pos := $camera_twist/camera_pitch/camera_pos
 var cam_phy_inter: Physics_Interolate = Physics_Interolate.new()
+@onready var gun := $ModelTwist/gun
+@onready var tip := $ModelTwist/gun/tip
 
 var mouse_dir: Vector2 = Vector2.ZERO
 var camera_input_dir: Vector2 = Vector2.ZERO
@@ -118,7 +120,7 @@ func ray_cast_pos() -> void:
 	var collision_mask = 9
 	
 	cam_ray_pos = cam_pos.global_position
-	shoot_ray_pos = Vector3.UP + player.position
+	shoot_ray_pos = tip.global_position
 	var cam_ray_end : Vector3 = cam_ray_pos - cam_pos.global_transform.basis.z * 256
 	var space = get_world_3d().direct_space_state
 	var cam_query = PhysicsRayQueryParameters3D.create(cam_ray_pos, cam_ray_end, collision_mask)
@@ -207,19 +209,22 @@ func change_weapon(index: int = 1) -> void:
 		cur_weapon = weapons[weapon_index]
 		player_ui.update_reload_text()
 		#print(cur_weapon.resource.name)
-		return
-		
-	if weapon_index + index <= -1:
+		#return
+	elif weapon_index + index <= -1:
 		weapon_index = weapons.size()-1
 		cur_weapon = weapons[weapon_index]
 		#print(cur_weapon.resource.name)
 		player_ui.update_reload_text()
-		return
-	
-	weapon_index += index
+		#return
+	else:
+		weapon_index += index
 	cur_weapon = weapons[weapon_index]
 	
 	cur_weapon.set_modifers_listening(true)
+	if gun.get_child_count() >= 2:
+		gun.get_child(1).queue_free()
+	gun.add_child(cur_weapon.resource.model.instantiate())
+	
 	#print(cur_weapon.resource.name)
 	player_ui.update_reload_text()
 	return

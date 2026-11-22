@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cwo4ijruwnuhv"]
+
+[ext_resource type="PackedScene" uid="uid://ca71ssylrhdje" path="res://Weapons/TestWeapon2/test_weapon2.glb" id="1_rsv28"]
+[ext_resource type="Material" uid="uid://u6yaspo1b0ml" path="res://Weapons/gun_mat.tres" id="2_wbjs2"]
+
+[node name="test_weapon2" unique_id=2043540699 instance=ExtResource("1_rsv28")]
+
+[node name="Cube_001" parent="." index="0" unique_id=680071920]
+surface_material_override/0 = ExtResource("2_wbjs2")

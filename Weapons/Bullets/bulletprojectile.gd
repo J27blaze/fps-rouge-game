@@ -27,9 +27,9 @@ func _ready() -> void:
 		
 		areas[i] = Area3D.new()
 		
-		var pos_offset: Vector3 = dir * speed * float(i)/Engine.get_physics_ticks_per_second() * 0.9
+		var pos_offset: Vector3 = dir * speed * float(i)/Engine.get_physics_ticks_per_second()
 		
-		areas[i].position = Vector3.ZERO + pos_offset
+		areas[i].position = Vector3.ZERO - pos_offset*0.4
 		areas[i].collision_layer = 0
 		areas[i].collision_mask = 9
 		
