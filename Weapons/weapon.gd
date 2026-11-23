@@ -43,3 +43,7 @@ func load_projectile(from: Vector3, direction: Vector3, in_damage: float, speed:
 	bullet_instance.damage = in_damage
 	
 	GameManager.stage.add_child(bullet_instance)
+	
+func load_hitscan_bullet(a: Vector3 = Vector3.ZERO, b: Vector3 = Vector3.ZERO, thickness: float = 0.05, color: Color = Color.RED) -> void:
+	var bullet = HitscanBullet.new()
+	bullet.draw(a, b, thickness, color)

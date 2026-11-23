@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dc3lodourkx6s"]
+
+[ext_resource type="PackedScene" uid="uid://cday5jqpvdro8" path="res://Weapons/Sniper/sniper.glb" id="1_tvymh"]
+[ext_resource type="Material" uid="uid://u6yaspo1b0ml" path="res://Weapons/gun_mat.tres" id="2_o0nkn"]
+
+[node name="sniper" unique_id=233662703 instance=ExtResource("1_tvymh")]
+
+[node name="Cube_002" parent="." index="0" unique_id=1651428421]
+material_override = ExtResource("2_o0nkn")

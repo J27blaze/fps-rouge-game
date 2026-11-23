@@ -4,7 +4,7 @@ var weaponc: WeaponController:
 	get: return parent as WeaponController
 	set(value): weaponc = value
 
-func process_frame(delta: float):
+func process_frame(delta: float) -> void:
 	if InputHandler.is_action_buffered("weapon_change_up"):
 		InputHandler.clear_action_buffer("weapon_change_up")
 		change_state("change_weapon", 1)
@@ -13,7 +13,10 @@ func process_frame(delta: float):
 		InputHandler.clear_action_buffer("weapon_change_down")
 		change_state("change_weapon", -1)
 		return
-
+	
+	if weaponc.cur_weapon.cur_mag_size <= 0:
+		change_state("reload")
+		return
 	
 	if InputHandler.is_action_buffered("shoot") || (weaponc.cur_weapon.resource.is_automatic && Input.is_action_pressed("shoot")):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

@@ -43,7 +43,7 @@ var cur_weapon: Weapon
 func _ready() -> void:
 	
 	weapons.resize(2)
-	weapons[0] = Weapon.new() #hard code set the weapons
+	weapons[0] = Weapon.new(preload("uid://dbckqqhecdtix")) #hard code set the weapons
 	weapons[1] = Weapon.new(preload("uid://w1lfj3wujfvx")) #hard code set the weapons
 	cur_weapon = weapons[0]
 	
@@ -195,6 +195,7 @@ func shoot() -> void:
 			)
 		else:
 			ray_cast_damage()
+			cur_weapon.load_hitscan_bullet(shoot_ray_pos, hit_pos, 0.05, Color.TAN)
 		player_ui.update_reload_text()
 
 func reload() -> void:
@@ -203,6 +204,7 @@ func reload() -> void:
 	player_ui.update_reload_text()
 
 func change_weapon(index: int = 1) -> void:
+	spray_index = 0
 	cur_weapon.set_modifers_listening(false)
 	if weapon_index + index >= weapons.size():
 		weapon_index = 0

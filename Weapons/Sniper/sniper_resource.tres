@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://dbckqqhecdtix"]
+
+[ext_resource type="PackedScene" uid="uid://dc3lodourkx6s" path="res://Weapons/Sniper/sniper.tscn" id="1_eq4my"]
+[ext_resource type="Script" uid="uid://m1mbfmxom8xa" path="res://Weapons/weapon_resource.gd" id="2_c5iek"]
+[ext_resource type="Texture2D" uid="uid://c8xc1iw7a3yql" path="res://Weapons/Sniper/sniper_ui_asset.png" id="3_eq4my"]
+
+[sub_resource type="Curve" id="Curve_bt3tb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 1, Vector2(1, 0), 0.0, 0.0, 1, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("2_c5iek")
+name = "Sniper"
+model = ExtResource("1_eq4my")
+ui_asset = ExtResource("3_eq4my")
+base_damage = 85.0
+base_mag_size = 1.0
+base_fire_rate = 0.4
+base_burst_fire_interval = 0.07
+base_reload_length = 1.2
+recoil = Vector2(0, 13)
+recoil_variance = Vector2(5, 0)
+recoil_smoothing = 7.5
+spray_degree_by_bullet = SubResource("Curve_bt3tb")
+metadata/_custom_type_script = "uid://m1mbfmxom8xa"

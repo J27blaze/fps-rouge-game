@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://jws5ur8x7gel" path="res://Player/Scripts/WeaponController/Weapon_States/change_weapon_state.gd" id="13_gu6f8"]
 [ext_resource type="Texture2D" uid="uid://c41bsbl66lw06" path="res://icon.svg" id="14_dkpta"]
 [ext_resource type="Texture2D" uid="uid://c5l1b0m7ybm6e" path="res://UI/PlayerUI/temp_crosshair.png" id="14_gu6f8"]
+[ext_resource type="Texture2D" uid="uid://b42xapcf80nub" path="res://UI/PlayerUI/reload_empty.png" id="14_pisgm"]
+[ext_resource type="Texture2D" uid="uid://c8wysm2e0n1rx" path="res://UI/PlayerUI/reload.png" id="15_b1ygp"]
 [ext_resource type="Theme" uid="uid://c20kqyrrntcre" path="res://UI/Fonts/zen_dots_font_theme.tres" id="15_dkpta"]
 
 [sub_resource type="Curve" id="Curve_k53q1"]
@@ -166,6 +168,8 @@ _data = {
 &"swap": SubResource("Animation_pisgm")
 }
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_prgey"]
+
 [node name="Player" type="CharacterBody3D" unique_id=967936490 node_paths=PackedStringArray("ui")]
 collision_layer = 2
 script = ExtResource("1_l8h54")
@@ -233,12 +237,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68589365, 0.7357266, 0)
 [node name="tip" type="Node3D" parent="WeaponController/ModelTwist/gun" unique_id=1141748932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2295637)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="WeaponController/ModelTwist/gun/tip" unique_id=1708531758]
-visible = false
-light_color = Color(0, 1, 1, 1)
-light_energy = 0.8
-omni_range = 22.482113
-
 [node name="camera_twist" type="Node3D" parent="WeaponController" unique_id=1521490860]
 physics_interpolation_mode = 2
 top_level = true
@@ -292,6 +290,18 @@ mouse_filter = 2
 scale = Vector2(0.325, 0.325)
 texture = ExtResource("14_gu6f8")
 
+[node name="reload_meter" type="TextureProgressBar" parent="PlayerUI/PlayerUI/centre" unique_id=506360037]
+visible = false
+layout_mode = 0
+offset_left = -29.0
+offset_top = -29.0
+offset_right = 99.0
+offset_bottom = 99.0
+scale = Vector2(0.453, 0.453)
+fill_mode = 4
+texture_under = ExtResource("14_pisgm")
+texture_progress = ExtResource("15_b1ygp")
+
 [node name="left_bottom" type="Control" parent="PlayerUI/PlayerUI" unique_id=661977982]
 layout_mode = 1
 anchors_preset = 2
@@ -344,3 +354,8 @@ theme_override_font_sizes/normal_font_size = 44
 text = "12/12"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=635512309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+visible = false
+mesh = SubResource("CylinderMesh_prgey")

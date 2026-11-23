@@ -6,8 +6,8 @@
 [sub_resource type="SphereMesh" id="SphereMesh_ry41o"]
 radius = 0.1
 height = 1.5
-radial_segments = 12
-rings = 6
+radial_segments = 4
+rings = 1
 
 [node name="test_bullet" type="Node3D" unique_id=465095552]
 physics_interpolation_mode = 2
@@ -20,5 +20,6 @@ top_level = true
 
 [node name="mesh" type="MeshInstance3D" parent="model" unique_id=1113355645]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("SphereMesh_ry41o")
 surface_material_override/0 = ExtResource("2_nihem")
