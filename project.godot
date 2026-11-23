@@ -13,6 +13,7 @@ config_version=5
 config/name="fpsrougegame"
 run/main_scene="uid://q7ahpp2jpvmn"
 config/features=PackedStringArray("4.7", "Forward Plus")
+run/max_fps=165
 config/icon="res://icon.svg"
 
 [autoload]

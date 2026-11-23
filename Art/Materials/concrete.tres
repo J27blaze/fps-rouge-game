@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://r8obfkm83iku"]
+
+[ext_resource type="Texture2D" uid="uid://cuwwegj22l0uv" path="res://Art/Materials/concrete.png" id="1_5d2jc"]
+
+[resource]
+albedo_texture = ExtResource("1_5d2jc")
+uv1_scale = Vector3(0.06, 0.06, 0.06)
+uv1_triplanar = true
+uv1_world_triplanar = true

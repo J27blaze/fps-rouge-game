@@ -234,6 +234,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68589365, 0.7357266, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2295637)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="WeaponController/ModelTwist/gun/tip" unique_id=1708531758]
+visible = false
 light_color = Color(0, 1, 1, 1)
 light_energy = 0.8
 omni_range = 22.482113
