@@ -205,6 +205,7 @@ func reload() -> void:
 
 func change_weapon(index: int = 1) -> void:
 	spray_index = 0
+	
 	cur_weapon.set_modifers_listening(false)
 	if weapon_index + index >= weapons.size():
 		weapon_index = 0

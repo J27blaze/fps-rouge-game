@@ -14,6 +14,9 @@ class_name PlayerUI
 @onready var pos_second : Control = $left_bottom/Pos_second
 @export var reload: RichTextLabel
 
+@onready var cross_hair : Sprite2D = $centre/cross_hair
+@onready var reload_meter : TextureProgressBar = $centre/reload_meter
+
 var weapon_uis: Array[WeaponUI]
 
 func _ready() -> void:
@@ -27,10 +30,12 @@ func _process(delta: float) -> void:
 			if index == 0: weapon.position = pos_cur.position + weapon.pos_offset
 			elif index == 1: weapon.position = pos_second.position + weapon.pos_offset
 			index += 1
+			
 func swap_anim() -> void:
 	weapon_anim.play("swap")
 	weapon_uis[1].anim_player.play("fade_in")
 	weapon_uis[0].anim_player.play("fade_out")
+	
 func change_weapon_resource() -> void:
 	var temp1: WeaponUI = weapon_uis[0] # hard code
 	var temp2: WeaponUI = weapon_uis[1] 
@@ -71,3 +76,18 @@ func load_weapon_uis() -> void:
 
 func update_reload_text() -> void:
 	reload.text = str(int(weaponc.cur_weapon.cur_mag_size)) + "/" + str(int(weaponc.cur_weapon.resource.base_mag_size))
+
+var tween
+func start_reload() -> void:
+	cross_hair.visible = false
+	reload_meter.visible = true
+	
+	tween = get_tree().create_tween()
+	tween.tween_property(reload_meter, "value", 100, weaponc.cur_weapon.resource.base_reload_length)
+	
+func end_reload() -> void:
+	cross_hair.visible = true
+	reload_meter.visible = false
+	
+	tween.kill()
+	reload_meter.value = 0

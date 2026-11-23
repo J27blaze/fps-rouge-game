@@ -6,7 +6,13 @@ var weaponc: WeaponController:
 
 func start() -> void:
 	EventHandler.call_event(Event.Type.PLAYER_START_RELOAD)
+	
+	weaponc.player_ui.start_reload()
+	
 	timer_reset()
+
+func exit() -> void:
+	weaponc.player_ui.end_reload()
 
 func process_frame(delta: float) -> void:
 	if InputHandler.is_action_buffered("weapon_change_up"):

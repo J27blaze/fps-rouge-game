@@ -232,7 +232,7 @@ mesh = SubResource("CapsuleMesh_ry41o")
 surface_material_override/0 = SubResource("StandardMaterial3D_rmk3y")
 
 [node name="gun" type="Node3D" parent="WeaponController/ModelTwist" unique_id=1488348589]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68589365, 0.7357266, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.68589365, 0.9444517, 0)
 
 [node name="tip" type="Node3D" parent="WeaponController/ModelTwist/gun" unique_id=1141748932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2295637)
@@ -291,13 +291,13 @@ scale = Vector2(0.325, 0.325)
 texture = ExtResource("14_gu6f8")
 
 [node name="reload_meter" type="TextureProgressBar" parent="PlayerUI/PlayerUI/centre" unique_id=506360037]
-visible = false
 layout_mode = 0
-offset_left = -29.0
-offset_top = -29.0
-offset_right = 99.0
-offset_bottom = 99.0
-scale = Vector2(0.453, 0.453)
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 113.0
+offset_bottom = 113.0
+scale = Vector2(0.228, 0.228)
+mouse_filter = 2
 fill_mode = 4
 texture_under = ExtResource("14_pisgm")
 texture_progress = ExtResource("15_b1ygp")
